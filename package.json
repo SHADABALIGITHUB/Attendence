@@ -1,0 +1,11 @@
+{
+  "name": "full_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "start" : "node index.html"
+  },
+  "author": "",
+  "license": "ISC"
+}
