@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Center and End Divs</title>
+    <style>
+        .container {
+            width: 100%;
+            height: 20vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .center-div {
+            background-color: lightblue;
+            text-align: center;
+            flex: 1;
+        }
+
+        .end-div {
+            background-color: lightcoral;
+            width: 100px; /* You can adjust the width as needed */
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="center-div">Center Div</div>
+        <div class="end-div">End Div</div>
+    </div>
+</body>
+</html>

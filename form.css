@@ -1,0 +1,156 @@
+.form2{
+      background-color: #dfd8d8;
+      display: none;
+      width:220px;
+      height: 340px;
+      border-radius: 3%;
+      padding: 2%;
+      font-family: "Inter", sans-serif;
+      overflow: hidden;
+      justify-content: center;
+      transition:all 1s ease-in-out;
+      animation: shadab  2s infinite;
+      
+      
+
+}
+.form2 label {
+    color: #06866f;
+    font-size: 2rem;
+    font-family: inherit;
+    font-weight: 500;
+}
+form{
+    /* width: 200px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Student_signup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .5s ease-in-out;
+    position: relative;
+    left:400px;
+    display: none;
+    
+}
+.country_code{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.country_code select{
+    width: 25%;
+    height: 40px;
+    background: #929191;
+    margin: 2%;
+    /* padding: 1px; */
+    border: none;
+    outline: none;
+    border-radius: 4px;
+
+}
+#phoneNumber{
+    width: 80%;
+}
+#phoneNumber2{
+    width: 80%;
+}
+.Teacher_signup{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* left: (-50%); */
+
+  
+    transition: 0.5s ease-in-out;
+    position: static;
+}
+
+
+.Teacher_signup input,.Student_signup input{
+    
+
+    width: 95%;
+    height: 40px;
+    background: #929191;
+    margin: 2%;
+
+    border: none;
+    outline: none;
+    border-radius: 4px;
+  
+}
+
+.Teacher_signup button,.Student_signup button{
+    width: 50%;
+  height: 40px;
+  margin: 2%;
+  color: #fff;
+  background: #069a80;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: .2s ease-in;
+}
+#chk1,#chk2{
+    display: none;
+}
+
+
+/* #chk1,#chk2{
+    display: none;
+}*/
+
+#chk2:checked ~ .Teacher_signup{ 
+
+    opacity: 0.1;
+    position: relative;
+    /* left:-400px; */
+    display: none;
+     
+}
+#chk2:checked ~.Student_signup{
+    opacity: 1;
+    position: relative;
+    
+    display: block;
+}  
+
+
+/* @keyframes shadab {
+
+
+    0%{
+
+        background-color: #06866f;
+
+
+    }
+    30%{
+        background-color: #fff;
+        
+
+    }
+    50%{
+
+        background-color:#0a9e82;
+        
+
+    }
+    70%{
+        background-color: white;
+    }
+    90%{
+        background-color: #046d5c;
+    }
+    
+} */

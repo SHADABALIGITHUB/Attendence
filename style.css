@@ -1,0 +1,296 @@
+body{
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: "Inter", sans-serif;
+    background: linear-gradient(to bottom, #f9957F, #f2f5D0);
+    
+}
+.sidenav{
+	display: flex;
+	/* justify-content: center; */
+	/* flex-direction: column; */
+	width: 100%;
+}
+
+.gap_between{
+    display: flex;
+    justify-content:space-between;
+    align-items: center;
+}
+
+.class_nav{
+
+
+    background-color: #ffffff;
+    color: black;
+     width: 100%;
+     margin: 0;
+	 margin-bottom: 0.1%;
+     height: 5%;
+     display: flex;
+	 /* padding: 0px px; */
+     justify-content: space-between;
+     align-items: center;
+     /* border-radius: 3px; */
+     
+
+
+}
+.heading_jss{
+	font-family: inherit;
+	font-size: 0.7em;
+	text-align: center;
+	flex: 1;
+	color: #069a80;
+	
+}
+.menu-toggle {
+	
+	width: 50px;
+	/* margin-left:300px; */
+    display: flex;
+  
+    flex-direction: column;
+	text-align: center;
+    cursor: pointer;
+}
+
+.anchor{
+	 background-color: #f2f5D0;
+	 color: black;
+	 display: none;
+     width: 10%;
+     padding: 3%;
+     height: 80vh;
+     border-radius: 3px;
+	 transition: all 1s ease 1ms;
+}
+
+.anchor a{
+
+    display: block;
+	width: 100%;
+	/* padding-bottom: 500px; */
+	margin-bottom: 10%;
+     text-decoration: none;
+     color: inherit;
+     padding: 0.5%;
+     /* transition: all 1s ease 1ms; */
+     border-radius: 3px;
+
+
+}
+.anchor a:hover{
+
+    
+    color: white;
+    transform: scale(1.1);
+    background-color: #069a80;
+
+
+}
+.form_rap{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    flex-direction: column;
+}
+
+ .signuplabel{
+    display:none;
+}
+
+
+.login_heading{
+
+
+   display: flex;
+   background-color: #ffffff;
+   width: 240px;
+   height: 30px;
+   justify-content: space-around;
+   color: #333;
+    border-radius: 10px 0px;
+
+    /* padding:10px 20px; */
+    
+}
+
+.ok1{
+    color: #f2f5D0; 
+    font-weight: 600;
+    padding: 2%;
+    width: 50%;
+    text-align: center;
+}
+
+
+.login_heading_label{
+
+    background-color: #069a80;
+    color: #f2f5D0;
+    font-weight: 600;
+    padding: 2%;
+    width: 50%;
+    text-align: center;
+    border-radius: 10% 10% 10% 10%;
+    transition:background-color 0.1s ease-in;
+
+}
+.signup_heading_label{ 
+    display: none;
+    background-color: #069a80;
+    color: #f2f5D0;
+    font-weight: 600;
+    padding: 2%;
+    width: 50%;
+    margin: 1%;
+    text-align: center;
+    border-radius: 10% 10% 10% 10%;
+    transition:background-color 0.1s ease-in;
+
+
+}
+.ok11{
+    display: none;
+    /* background-color: #069a80; */
+    color: #f2f5D0;
+    font-weight: 600;
+    padding: 2%;
+    width: 50%;
+    margin: 1%;
+    text-align: center;
+    border-radius: 10% 10% 10% 10%;
+    transition:background-color 0.1s ease-in;
+
+}
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+.bar {
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    margin: 3px 0;
+    border-radius: 3px;
+    transition: 0.4s;
+}
+
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.signup_firsttime ,.forget{
+	font-family: sans-serif;
+	color: #069a80;
+	font-size: .6em;
+	margin-top: 8%;
+	cursor: pointer;
+
+
+}
+
+
+@media (max-width:480px){
+
+	.anchor{
+	
+		width: 100%;
+		/* margin: 3%;  */
+		position: absolute;
+		text-align: center;
+   
+		 height: fit-content;
+		display: none;
+		justify-content:space-around;
+		 align-items: center; 
+	   
+		 }	
+
+.login_heading{
+
+
+  
+    width: 185px;
+    height: 30px;
+    justify-content: space-around;
+     border-radius: 10px 0px;
+ 
+     padding:10px 20px;
+     
+ }
+
+
+			 
+		   
+		   
+	   
+	   
+	   .anchor a{
+		   margin-bottom: 1%;
+	   }
+	
+	   .class_nav{
+		   margin-bottom: 5%;
+	   }
+   
+
+}
+
+.shift{
+    margin-top: 20%;
+    width: 100%;
+    border-radius: 50% 50% 10% 10%;
+    background-color: #069a80;
+    padding: 7%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.shift .label_below{
+     font-size: 0.9rem;
+     color: white;
+}
+.shift .material-symbols-outlined{
+    color: #ffffff;
+    font-variation-settings:
+     
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+
+}
+.material-symbols-outlined {
+    color: #069a80;
+    font-variation-settings:
+     
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24
+     
+  }
+

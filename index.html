@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     
+    <link rel="stylesheet" type="text/css" href="slide navbar style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+      <!-- personal css below -->
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Autour+One&family=DM+Sans:opsz@9..40&family=Dancing+Script:wght@500&family=Public+Sans:wght@300&display=swap" rel="stylesheet">              
+      <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="form.css">
+    <link rel="stylesheet" href="form1.css">
+    <link rel="stylesheet" href="forget.css">
+</head>
+
+<body>
+
+    <nav class="class_nav">
+
+        <div class="heading_jss">
+
+            <h2>Shadab Attendence Portal </h2>
+
+        </div>
+
+        <div class="menu-toggle">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+
+    </nav>
+ 
+   
+    <div class="sidenav">
+
+
+
+
+        <div class="forget_password_div">
+
+            <div class="forget_form">
+
+
+               
+
+              
+                    <form>
+                        <label for="forget" aria-hidden="true">Verified Detailed</label>
+
+                        <input type="email" name="email" class="t_email" placeholder="Email /Username" required="">
+                        <input type="password" name="pswd" placeholder="Password" required="">
+                        <input type="password" name="re_pswd" placeholder="Re Password" required="">
+                       
+                        <button id="login">Change</button>
+                       
+                    </form>
+                
+
+                
+            </div>
+
+
+
+        </div>
+
+        
+          
+
+
+
+        <div class="form_rap">
+
+
+            <!---form login -->
+
+
+            <div class="form1">
+
+
+               
+
+                <div class="login_teacher">
+                    <form action="./welcome.html">
+                        <div  style="display: flex;align-items: center; justify-content: space-around;">
+                        <label aria-hidden="true">Teacher</label>
+                        
+                        <span class="material-symbols-outlined">
+                            school
+                            </span>
+                        </div>
+                            <input type="email" name="email" class="t_email" placeholder="Email /Username" required="">
+                        <input type="password" name="pswd" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="Password" required="">
+                        <button   type="submit">Login</button>
+                        <div class="forget">
+                             <h2>Forget Password ?</h2>
+                        </div>
+                        <div class="shift">
+                            <label class="label_below" for="o">Student</label>
+                            <span class="material-symbols-outlined">
+                                account_circle
+                                </span>
+                        </div>
+                    </form>
+     
+                  
+                      
+                </div>
+
+                <div class="login_student">
+                    <form>
+                        <div style="display: flex;align-items: center; justify-content: space-around;">
+                        <label for="ch" aria-hidden="true">Student</label>
+                        <span class="material-symbols-outlined">
+                            account_circle
+                            </span>
+                        </div>
+                        <input type="email" name="email" placeholder="Email" required="">
+                        <input type="password" name="pswd" placeholder="Password" required="">
+                        <button id="login_s" class="t_login" >Login</button>
+                        <div class="forget">
+                            <h2>forget password ?</h2>
+                       </div>
+
+                       <div class="shift_student">
+                        <label class="label_below_student" for="o">Teacher</label>
+                        <span class="material-symbols-outlined">
+                            school
+                        </span>
+                       
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+
+
+            <div class="form2">
+
+                <input type="checkbox" id="chk2" aria-hidden="true">
+
+                <div class="Teacher_signup">
+                    <form>
+                        <label for="ch" aria-hidden="true">Teacher</label>
+
+
+
+                        <input type="text" name="f_name" placeholder="Name" required="">
+                        <input type="email" name="email" placeholder="Email" required="">
+                        <div class="country_code">
+                            <select id="countryCode1" name="countryCode">
+                                <option value="+91">(+91) India</option>
+                                <option value="+1">(+1) United State</option>
+                                <option value="+44">United Kingdom (+44)</option>
+
+                            </select>
+                            <input class="mobile" type="text" id="phoneNumber" name="phoneNumber"
+                                placeholder="Enter mobile number">
+                        </div>
+                        <input type="password" name="pswd" placeholder="Set Password" required="">
+                        <button id="sign_t">Sign Up</button>
+                    </form>
+                </div>
+
+                <div class="Student_signup">
+                    <form>
+                        <label for="ch" aria-hidden="true">Student</label>
+
+                        <input type="text" name="f_name" placeholder="Name" required="">
+                        <input type="email" name="email" placeholder="Email" required="">
+                        <div class="country_code">
+                            <select id="countryCode2" name="countryCode">
+                                <option value="+1">United States (+1)</option>
+                                <option value="+44">United Kingdom (+44)</option>
+
+                            </select>
+                            <input class="mobile" type="text" id="phoneNumber2" name="phoneNumber"
+                                placeholder="Enter mobile number">
+                        </div>
+                        <input type="password" name="pswd" placeholder="Set Password" required="">
+                        <button id="sign_s">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="signup_firsttime">
+
+                <h2>
+                    New user ? sigup Here
+                </h2>
+
+            </div>
+        </div>
+
+
+        <div class="anchor">
+            <a href="#">Home</a>
+            <a href="#">Attendence</a>
+            <a href="#" id="portal_heading">Portal</a>
+            <!-- <a href="#"></a>
+    <a href="#"></a>
+   
+    <a href="#"></a> -->
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <a href="#"></a>
+            <a href="#" id="login">Login</a>
+            <a href="#" id="signup">Sign up</a>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+
+
+
+   
+    <script src="login.js"></script>
+     
+    <script src="forget.js"></script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
