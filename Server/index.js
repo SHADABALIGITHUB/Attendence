@@ -1,19 +1,41 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
-// Create an instance of express app
+
+
 const app = express();
-
-// Use body-parser middleware to parse request bodies
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+const mongooseConnect = require('./config/database');
+mongooseConnect();
+
+
+
+
+
+
+//  routes 
+const problemsetQuestionList=require('./routes/ProblemLIst.routes');
+
+
+
+
+
+
 // Define a sample route
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+       
+       res.send("working ")
+     
 });
+app.use('/pro',problemsetQuestionList);
+
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port PORT`);
+    console.log(`Server is running on port ${PORT}`);
 });

@@ -8,9 +8,7 @@ import {style} from '../../styles/login'
 
 const Login:React.FC = () => {
   return (
-    <Box
-    sx={{width:'100vw',display:'flex',justifyContent:'center',alignItems:"center"}}
-   >
+   
    <Box
 
      component="form"
@@ -18,7 +16,7 @@ const Login:React.FC = () => {
      noValidate
      autoComplete='off'
      >
-       <Typography variant='h4' sx={{ color: '#068fb4' }} component='h4' gutterBottom>Login Here</Typography>
+       <Typography variant='h4' sx={{ color: '#068fb4' }} component='h4' gutterBottom>Create Account </Typography>
        <TextField name="username" type='text' label="Username" variant="outlined" fullWidth  required />
        <TextField name="password" type='password' label="Password" variant="outlined" fullWidth  required  />
        <TextField name="email" type="email" label="Email" variant="outlined" fullWidth required />
@@ -30,7 +28,7 @@ const Login:React.FC = () => {
      
    </Box>
 
-</Box>
+
   )
 }
 
