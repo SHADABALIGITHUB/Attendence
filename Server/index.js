@@ -19,6 +19,7 @@ mongooseConnect();
 
 //  routes 
 const problemsetQuestionList=require('./routes/ProblemLIst.routes');
+const CreateUser=require('./routes/Auth/CreateUser.routes');
 
 
 
@@ -31,6 +32,7 @@ app.get('/', (req, res) => {
        res.send("working ")
      
 });
+app.use('/api/user',CreateUser);
 app.use('/pro',problemsetQuestionList);
 
 

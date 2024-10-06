@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {Link as RouterLink} from 'react-router-dom';
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
+import { AuthStatus } from '../../context/Auth';
+import { useContext } from 'react';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "light" ? "#1A2027" : "#fff",
@@ -12,6 +14,20 @@ const Item = styled(Paper)(({ theme }) => ({
   }));
 
 const LandingPage:React.FC = () => {
+    const authContext = useContext(AuthStatus);
+
+    if (!authContext) {
+        throw new Error("useContext must be used within AuthStatusProvider");
+      }
+
+      const { authStatus, setAuthStatus } = authContext;
+
+
+    useEffect(()=>{
+
+           setAuthStatus(false);
+
+    },[])
 
    
       
@@ -20,7 +36,7 @@ const LandingPage:React.FC = () => {
     
        <>
       
-
+      <h2 style={{color:'red'}} >Hwlo {authStatus?"Welcome":"login Please"}</h2>
        
       <RouterLink to="/login" ><Item>  Login Your Account </Item></RouterLink>
     <RouterLink to="/register"><Item>  Register New User </Item> </RouterLink> 
