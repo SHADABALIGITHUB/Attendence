@@ -1,10 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
-
+const cors=require('cors');
 
 
 const app = express();
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -20,6 +21,7 @@ mongooseConnect();
 //  routes 
 const problemsetQuestionList=require('./routes/ProblemLIst.routes');
 const CreateUser=require('./routes/Auth/CreateUser.routes');
+const OtpVerificationRouter=require('./routes/Auth/OtpVerification.routes')
 
 
 
@@ -33,7 +35,12 @@ app.get('/', (req, res) => {
      
 });
 app.use('/api/user',CreateUser);
+app.use('/api/user',OtpVerificationRouter);
+
+
+// admin route only
 app.use('/pro',problemsetQuestionList);
+
 
 
 

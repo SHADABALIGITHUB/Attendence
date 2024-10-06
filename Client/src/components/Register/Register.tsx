@@ -22,19 +22,23 @@ const Register:React.FC = () => {
 
         event.preventDefault();
         
-        console.log({username:username,password:password,email:email});
+        
+        console.log("working1");
+        
         try {
+        console.log("working2");
         const user= await fetch('http://localhost:5000/api/user/create',{ 
             method:'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({username:username,password:password,email:email})
 
         })
+        console.log("working3");
 
         const data = await user.json();
-        
+
         if(data.status){
-            navigate('/verify');
+            navigate('/register-verify');
         }
         
 
@@ -51,7 +55,6 @@ const Register:React.FC = () => {
 
      component="form"
      onSubmit={(event)=>handleRegister(event)}
-    
      sx={style}
      noValidate
      autoComplete='off'
