@@ -28,7 +28,7 @@ const Register:React.FC = () => {
         
         try {
         
-        const user= await  FetchInstance('/user/create',{ 
+        const user= await  FetchInstance('api/user/create',{ 
             method:'POST',
             body: JSON.stringify({username:username,password:password,email:email})
 

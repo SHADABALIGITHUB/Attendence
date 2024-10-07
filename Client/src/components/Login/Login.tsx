@@ -28,7 +28,7 @@ const Login:React.FC = () => {
        e.preventDefault();
         try{
 
-            const response= await FetchInstance('/user/login',{
+            const response= await FetchInstance('/api/user/login',{
                 method:'POST',
                 body: JSON.stringify({email:email,password:password})
             })
