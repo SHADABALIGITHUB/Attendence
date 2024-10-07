@@ -7,10 +7,12 @@ import '@fontsource/roboto/400.css'; // Regular font
 import '@fontsource/roboto/500.css'; // Medium font
 import '@fontsource/roboto/700.css';
 import AuthStatusProvider from './context/Auth.tsx';
+import { CssBaseline } from '@mui/material';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <AuthStatusProvider>
+    <CssBaseline/>
     <App />
     </AuthStatusProvider>
   </StrictMode>,

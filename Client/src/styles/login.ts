@@ -8,13 +8,7 @@ export const style = {
       xs:2,
       md:3,
     },
-    width:{
-       xs: '100%',
-       sm: '80%',
-       md: '50%',
-       lg: '40%',
-  
-    },
+    width:'50vw',
     display:'flex',
     flexDirection:'column',
     justifyContent:'center',

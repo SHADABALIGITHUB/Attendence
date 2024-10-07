@@ -3,21 +3,50 @@ import * as React from 'react';
 import TextField from '@mui/material/TextField';
 import { Box, styled } from '@mui/system';
 import { Button } from '@mui/material';
+import { useLocation,useNavigate } from 'react-router-dom';
 
 export default function OTPInput() {
   const [otp, setOtp] = React.useState<String[]>(new Array(4).fill(''));
- 
+  const location=useLocation();
+  const navigate=useNavigate();
+  const myemail:String=location.state?.email;
   
 //    submit logic 
-    const onVerify=()=>{
+    const onVerify=async ()=>{
 
-         console.log(otp.join(''));
+        const data1={email:myemail,otp:otp.join('')};
+        
+       
+        try {
+           
+            const response= await fetch('http://localhost:5000/api/user/verify',{ 
+                method:'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data1),
+    
+            })
+           
+           
+            
+            const data = await response.json();
+            console.log(data);
+    
+            if(data.status){
+                navigate('/dashboard');
+            }
+            
+    
+           
+        }
+        catch(err){
+            console.error('There was a problem with the fetch operation:', err); // Error handling
+        }
 
     }
 
 
 
-    //   otp form
+    
   
 
   const handleOnChange=(event:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,index:number)=>{

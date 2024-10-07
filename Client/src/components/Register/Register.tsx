@@ -7,6 +7,7 @@ import { Typography,Link as MuiLink ,IconButton} from '@mui/material';
 import {style} from '../../styles/login'
 import CloseIcon from '@mui/icons-material/Close';
 import { useNavigate } from 'react-router-dom';
+import FetchInstance from '../../fetchInstance/Fetch';
 
 
 const Register:React.FC = () => {
@@ -23,26 +24,26 @@ const Register:React.FC = () => {
         event.preventDefault();
         
         
-        console.log("working1");
+        
         
         try {
-        console.log("working2");
-        const user= await fetch('http://localhost:5000/api/user/create',{ 
+        
+        const user= await  FetchInstance('/user/create',{ 
             method:'POST',
-            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({username:username,password:password,email:email})
 
         })
-        console.log("working3");
+       
 
-        const data = await user.json();
+        
+        console.log(user.status);
 
-        if(data.status){
-            navigate('/register-verify');
+        if(user.status){
+            navigate('/register-verify',{ state: { email: email } });
         }
         
 
-        console.log(data);
+        // console.log(data);
     }
     catch(err){
         console.error('There was a problem with the fetch operation:', err); // Error handling

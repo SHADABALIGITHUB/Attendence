@@ -20,9 +20,9 @@ mongooseConnect();
 
 //  routes 
 const problemsetQuestionList=require('./routes/ProblemLIst.routes');
-const CreateUser=require('./routes/Auth/CreateUser.routes');
+const CreateUserRoute=require('./routes/Auth/CreateUser.routes');
 const OtpVerificationRouter=require('./routes/Auth/OtpVerification.routes')
-
+const LoginUserRoute=require('./routes/Auth/LoginUser.routes')
 
 
 
@@ -34,8 +34,9 @@ app.get('/', (req, res) => {
        res.send("working ")
      
 });
-app.use('/api/user',CreateUser);
+app.use('/api/user',CreateUserRoute);
 app.use('/api/user',OtpVerificationRouter);
+app.use('/api/user',LoginUserRoute)
 
 
 // admin route only
