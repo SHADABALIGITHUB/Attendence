@@ -2,7 +2,8 @@
   
 
 const mongoose = require('mongoose');
-const url = 'mongodb://127.0.0.1:27017/leetcode';
+require('dotenv').config();
+const url =process.env.MONGODB_URI;
 
 // Define the function and then export it
 const mongooseConnect = async () => {

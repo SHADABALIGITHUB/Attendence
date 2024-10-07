@@ -1,6 +1,4 @@
-const BASE_URL = 'http://localhost:5000/api';
-
-
+const BASE_URL = import.meta.env.VITE_Node_URL;
 const FetchInstance= async (endpoint:string,options:RequestInit={})=>{
 
        const defaultHeaders={
