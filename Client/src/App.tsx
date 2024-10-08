@@ -30,8 +30,15 @@ function App() {
        <Route path='/login' element={authStatus?<Navigate to="/dashboard" replace/>:<Login/>}/>
        <Route path='/register' element={authStatus?<Navigate to="/dashboard" replace/>:<Register/>}/>
        <Route path='/register-verify' element={authStatus?<Navigate to="/dashboard" replace/>:<Verify/>}/>
-       <Route path='/dashboard' element={authStatus?<Dashboard/>:<Navigate to="/login" replace />}/>
-       <Route path='/create-sheet' element={authStatus?<CreateSheet/>:<Navigate to="/login" replace />} />
+
+          <Route path='/dashboard' element={authStatus?<Dashboard/>:<Navigate to="/login" replace />}>
+           
+              <Route path='/create-sheet' element={authStatus?<CreateSheet/>:<Navigate to="/login" replace />} />
+       
+          </Route>
+       
+       
+       
       </Route>
       <Route path='*' element={<h2> Notfound </h2>}></Route>
 

@@ -1,14 +1,12 @@
 
 export const style = {
     p: {
-      xs:2,
+      xs: 2,
       md: 4, 
     },
-    m:{
-      xs:2,
-      md:3,
-    },
-    width:'50vw',
+    maxWidth:'600px',
+    minWidth:'200px',
+    width:{xs:'90vw',sm:'50vw'},
     display:'flex',
     flexDirection:'column',
     justifyContent:'center',

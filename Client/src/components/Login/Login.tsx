@@ -77,7 +77,7 @@ sx={{
 <CloseIcon />
 </IconButton>
        
-       <Typography variant='h4' sx={ { color: '#068fb4',fontSize:{xs:'20px',md:'35px'} }}  component='h4' gutterBottom> Login  </Typography>
+       <Typography variant='h4' sx={ { color: '#068fb4',fontSize:{xs:'20px',sm:'30px',md:'35px'} }}  component='h4' gutterBottom> Login  </Typography>
        
       
        <TextField name="email" onChange={(e)=>{setEmail(e.target.value)}} type="email" label="Email" variant="outlined" fullWidth required  />
