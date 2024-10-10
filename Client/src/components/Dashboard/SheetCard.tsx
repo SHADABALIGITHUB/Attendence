@@ -6,25 +6,34 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-const SheetCard:React.FC = () => {
+import  { UserSheetType } from './DashboardContainer';
+import { useNavigate } from 'react-router-dom';
+interface SheetCardProps {
+  data: UserSheetType; // Accepts an array of UserSheetType
+}
+const SheetCard:React.FC<SheetCardProps> = ({data}) => {
+   const navigate=useNavigate();
   return (
     <Card sx={{ maxWidth: 345 }}>
     <CardMedia
       sx={{ height: 140 }}
-      image="/images/Cards/code1.jpg"
+      image={data.sheetid==3?"https://res.cloudinary.com/ddnum51yo/image/upload/v1728586195/Leetcode/DefaultSheet/download_pb5ozu.jpg":'./images/Cards/code1.jpg'}
       title="green iguana"
     />
     <CardContent>
       <Typography gutterBottom variant="h5" component="div">
-         Dsa Apna College
+         {data.title}
       </Typography>
       <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-         Here i use The started Dsa Question only 
+       Total Question : {data.Listquestion.length}
+      </Typography>
+      <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+       Created At : {data.createdAt.slice(0,10)}
       </Typography>
     </CardContent>
     <CardActions>
-      <Button size="small">Share(* in Future) </Button>
-      <Button size="small"> Open </Button>
+      <Button size="small">Share(Future) </Button>
+      <Button size="small" onClick={()=>{ navigate('/view-sheet',{ state: { sheetid:data.sheetid } })      }  }> Open </Button>
     </CardActions>
   </Card>
   )

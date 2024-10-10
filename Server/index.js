@@ -25,7 +25,7 @@ const OtpVerificationRouter=require('./routes/Auth/OtpVerification.routes')
 const LoginUserRoute=require('./routes/Auth/LoginUser.routes')
 const DefaultSheet=require('./routes/Sheets/DefaultSheet.routes');
 const GetQuestionRouter=require('./routes/Sheets/GetQuesionWithID.routes');
-
+const PrepareCompleteSheetUsingIdRouter=require('./routes/Sheets/PrepareCompleteSheetUsingId.routes');
 
 
 
@@ -43,6 +43,7 @@ app.use('/api/user',LoginUserRoute)
 // sheet 
 
 app.use('/api/sheet',DefaultSheet);
+app.use('/api/sheet',PrepareCompleteSheetUsingIdRouter);
 
 
 

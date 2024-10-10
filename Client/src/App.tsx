@@ -12,6 +12,7 @@ import { Navigate } from 'react-router-dom';
 import { AuthStatus } from './context/Auth';
 import DashboardLayout from './components/Dashboard/DashboardLayout';
 import TableForAdding from './components/CreateSheet/TableForAdding';
+import ViewSheet from './components/Dashboard/Sheets/ViewSheet';
 
 
 
@@ -38,6 +39,7 @@ function App() {
               <Route path="/dashboard" element={authStatus?<Dashboard/>:<Navigate to="/login" replace />} />
               <Route path='/create-sheet' element={authStatus?<CreateSheet/>:<Navigate to="/login" replace />} />
               <Route path="/create-sheet-table" element={<TableForAdding/>} />
+              <Route path="/view-sheet" element={<ViewSheet/>}/>
        
           </Route>
        
