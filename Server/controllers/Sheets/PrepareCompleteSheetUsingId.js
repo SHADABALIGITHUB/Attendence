@@ -1,7 +1,29 @@
+const {Sheets} =require('../../models/UserSheets/DefaultSheets');
+
+
 const PrepareCompleteSheetUsingId= async (req,res) =>{
 
 
-       res.send("working routes here and every other place to")
+
+      try{
+        
+       const UserSheetId=req.params.id;
+
+         console.log(1);
+
+       const SheetData= await Sheets.findOne({sheetid:UserSheetId});
+
+       
+
+       return res.status(200).json({data:SheetData});
+       
+
+       
+      }
+      catch(err){
+        console.log("Error in this Preparing ",err);
+        res.status(500).json({status:false});
+      }
 
 }
 

@@ -29,7 +29,9 @@ const CreateSheet:React.FC = () => {
        
       
        <TextField name="question" type="text" label="Total Questions" variant="outlined" fullWidth required  />
+       <TextField name="title" type='text' label="Sheet Title" variant="outlined" fullWidth  required  />
        <TextField name="password" type='text' label="_blank" variant="outlined" fullWidth  required  />
+
 
        <Button type='submit' variant="contained" sx={{maxWidth:'300px',minWidth:'100px'}}> login </Button>
         <MuiLink sx={{fontSize:{xs:'12px',md:'14px'}}} component={RouterLink} to="/register" underline="hover">

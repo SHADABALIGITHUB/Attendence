@@ -33,7 +33,7 @@ const SheetCard:React.FC<SheetCardProps> = ({data}) => {
     </CardContent>
     <CardActions>
       <Button size="small">Share(Future) </Button>
-      <Button size="small" onClick={()=>{ navigate('/view-sheet',{ state: { sheetid:data.sheetid } })      }  }> Open </Button>
+      <Button size="small" onClick={()=>{ navigate('/view-sheet',{ state: { Listquestion:data.Listquestion} })      }  }> Open </Button>
     </CardActions>
   </Card>
   )
