@@ -30,7 +30,7 @@
   <MenuIcon />
 </IconButton>
 <Box sx={{display:'flex',gap:'20px',cursor:'pointer'}}>
-<Typography variant="h6" noWrap>
+<Typography variant="h6" noWrap onClick={()=>{naviagte('/dashboard')}}>
   Dashboard
 </Typography>
 <Typography variant="h6" noWrap sx={{':hover':{color:'#E2DFD2'}}} onClick={NewCreation}>

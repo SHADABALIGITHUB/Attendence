@@ -68,4 +68,4 @@ const Question_Schema= new mongoose.Schema({
 const Question=mongoose.model('QuestionsList',Question_Schema);
 
 
-module.exports=Question;
+module.exports={Question,Question_Schema};

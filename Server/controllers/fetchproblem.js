@@ -1,5 +1,5 @@
 const axios = require('axios');
-const QuestionModel=require('../models/Problems/Leetcodeproblem');
+const {Question}=require('../models/Problems/Leetcodeproblem');
 const mongoose=require('mongoose');
 
 const  fetchLeetCodeProblems=async(req,res)=> {
@@ -60,7 +60,7 @@ const  fetchLeetCodeProblems=async(req,res)=> {
     for(let i=0;i<3308;i++){
         const value=response.data.data.problemsetQuestionList.questions[i];
 
-        const done= await  QuestionModel.create({
+        const done= await  Question.create({
 
 "acRate": value.acRate,
 "difficulty": value.difficulty,

@@ -10,6 +10,8 @@ import CreateSheet from './components/CreateSheet/CreateSheet';
 import { useContext } from 'react';
 import { Navigate } from 'react-router-dom';
 import { AuthStatus } from './context/Auth';
+import DashboardLayout from './components/Dashboard/DashboardLayout';
+import TableForAdding from './components/CreateSheet/TableForAdding';
 
 
 
@@ -31,9 +33,11 @@ function App() {
        <Route path='/register' element={authStatus?<Navigate to="/dashboard" replace/>:<Register/>}/>
        <Route path='/register-verify' element={authStatus?<Navigate to="/dashboard" replace/>:<Verify/>}/>
 
-          <Route path='/dashboard' element={authStatus?<Dashboard/>:<Navigate to="/login" replace />}>
-           
+          <Route path='/' element={authStatus?<DashboardLayout/>:<Navigate to="/login" replace />}>
+            
+              <Route path="/dashboard" element={authStatus?<Dashboard/>:<Navigate to="/login" replace />} />
               <Route path='/create-sheet' element={authStatus?<CreateSheet/>:<Navigate to="/login" replace />} />
+              <Route path="/create-sheet-table" element={<TableForAdding/>} />
        
           </Route>
        
@@ -41,6 +45,7 @@ function App() {
        
       </Route>
       <Route path='*' element={<h2> Notfound </h2>}></Route>
+      {/* <Route path='/create-sheet-dev' element={<CreateSheet/>} /> */}
 
 
      </Routes>
