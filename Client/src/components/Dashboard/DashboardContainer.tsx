@@ -1,7 +1,18 @@
-import React, { useEffect, useState } from 'react'
-import { Box, Typography } from '@mui/material'
-import Grid2 from '@mui/material/Grid2'
+import React, { useEffect, useState,useContext } from 'react'
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
+
+
+
+
 import FetchInstance from '../../fetchInstance/Fetch';
+import { UserSheetsDataContext } from '../../context/UserSheets';
+
 
 import SheetCard from './SheetCard';
 
@@ -23,6 +34,9 @@ export interface UserSheetType{
 const DashboardContainer:React.FC = () => {
 
     const [userSheet,SetUserSheet]=useState<UserSheetType[]>([]);
+    const {UserSheetsData}=useContext(UserSheetsDataContext);
+    
+
 
 
      useEffect(()=>{
@@ -30,7 +44,7 @@ const DashboardContainer:React.FC = () => {
         const CallApi =async()=>{
 
           try{
-            const response=await FetchInstance('/api/sheet/default',{
+            const response=await FetchInstance(`/api/sheet/default/shadab89@gmail.com`,{
               method:"GET"
             })
 
@@ -67,35 +81,46 @@ const DashboardContainer:React.FC = () => {
 
 
   return (
-    <Box sx={{paddingTop:'100px'}}>
 
-  <Typography component="h2" sx={{fontSize:'20px',fontWeight:'700',margin:'4px' , color:'#239ED0'}}>
-  Default Sheets 
-  </Typography>
 
+
+    <TableContainer component={Paper} sx={{marginTop:'100px',width:'100%'}}>
+
+    <Table aria-label="simple table">
+    <TableHead>
+          <TableRow>
+            <TableCell align="center"> Default Sheets </TableCell>
+            <TableCell align="center"> My Sheets </TableCell>
+          </TableRow>
+        </TableHead>
+
+      <TableBody>
+          <TableRow>
+            <TableCell sx={{display:'flex',flexWrap:'wrap',gap:'15px'}}>
+            {
+   userSheet.length!=0?userSheet.map((item,index)=><SheetCard key={index} data={item}/>):<h2 style={{color:'primary'}}>No Sheet Yet</h2>
+         }
+
+            </TableCell>
+            <TableCell>
+            {
+            UserSheetsData.length!=0?UserSheetsData.map((item,index)=><SheetCard key={index} data={item}/>):<h2 style={{color:'primary'}}>No Sheet Yet</h2>
  
- <Grid2 container component='main' spacing={3} sx={{display:'flex',justifyContent:'center',alignContent:'center'}}>
+          }   
 
-        
-         {
-            userSheet.length!=0?userSheet.map((item,index)=><SheetCard key={index} data={item}/>):<h2 style={{color:'primary'}}>No Sheet Yet</h2>
-        }
+            </TableCell>
+
           
-                   
-                   
-               
-           
-        </Grid2>
 
-    
-    
-  
 
-   
-         
-       
- 
-    </Box>
+          </TableRow>
+      </TableBody>
+
+
+
+    </Table>
+    
+   </TableContainer>
   )
 }
 

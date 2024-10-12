@@ -14,7 +14,7 @@ interface SheetCardProps {
 const SheetCard:React.FC<SheetCardProps> = ({data}) => {
    const navigate=useNavigate();
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345,minWidth:280 }}>
     <CardMedia
       sx={{ height: 140 }}
       image={data.sheetid==3?"https://res.cloudinary.com/ddnum51yo/image/upload/v1728586195/Leetcode/DefaultSheet/download_pb5ozu.jpg":'./images/Cards/code1.jpg'}

@@ -9,11 +9,11 @@ const PrepareCompleteSheetUsingId= async (req,res) =>{
         
        const UserSheetId=req.params.id;
 
-         console.log(1);
+        
 
        const SheetData= await Sheets.findOne({sheetid:UserSheetId});
 
-       
+        
 
        return res.status(200).json({data:SheetData});
        

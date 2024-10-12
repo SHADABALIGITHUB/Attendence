@@ -1,37 +1,18 @@
-const {Sheets} =require('../../models/UserSheets/DefaultSheets');
 
-const DefaultSheetEnter= async (req,res)=>{
+
+const DefaultSheetEnter=(Sheets)=> async (req,res)=>{
 
       try{
 
-        // const sheetId=req.body.sheetId;
-
-    //   const check=await Sheets.findOne({})
+       const {title,useremail}=req.body;
       
       
 
       const response= await Sheets.create({
         
-        Listquestion:[
-          {
-            questionid:7,
-            questionName:"Reverse Integer",
-          },
-          {
-            questionid:9,
-            questionName:"Palindrome Number",
-          },
-          {
-            questionid:125,
-            questionName:"Valid Palindrome",
-          },
-          {
-            questionid:509,
-            questionName:"Fibonacci Number",
-          }
-        ],
-        title:"Love Babbar Sheet ",
-        userId:'shadab89@gmail.com', 
+        Listquestion:[],
+        title:title,
+        userId:useremail,
 
         
 
@@ -60,7 +41,7 @@ const DefaultSheetEnter= async (req,res)=>{
       
 
          
-      res.send("New Default Sheet Enter ");
+    
 
 }
 

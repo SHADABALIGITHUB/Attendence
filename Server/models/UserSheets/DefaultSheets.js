@@ -1,4 +1,5 @@
 const mongoose=require('mongoose');
+const { Question } = require('../Problems/Leetcodeproblem');
 const AutoIncrement=require('mongoose-sequence')(mongoose);
 
 const Question_Sheet=new mongoose.Schema({
@@ -27,6 +28,7 @@ const CollectionSheet=new mongoose.Schema({
 CollectionSheet.plugin(AutoIncrement, { inc_field: 'sheetid' });
 
 const Sheets=mongoose.model('DefaultSheets',CollectionSheet);
+const UserSheets=mongoose.model('UserSheets',CollectionSheet);
 
 
-module.exports={Sheets};
+module.exports={Sheets,UserSheets};

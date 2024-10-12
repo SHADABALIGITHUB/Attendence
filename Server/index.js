@@ -23,9 +23,10 @@ const problemsetQuestionList=require('./routes/ProblemLIst.routes');
 const CreateUserRoute=require('./routes/Auth/CreateUser.routes');
 const OtpVerificationRouter=require('./routes/Auth/OtpVerification.routes')
 const LoginUserRoute=require('./routes/Auth/LoginUser.routes')
-const DefaultSheet=require('./routes/Sheets/DefaultSheet.routes');
+const Sheets=require('./routes/Sheets/AllSheet.routes');
 const GetQuestionRouter=require('./routes/Sheets/GetQuesionWithID.routes');
 const PrepareCompleteSheetUsingIdRouter=require('./routes/Sheets/PrepareCompleteSheetUsingId.routes');
+const AddQuestionsIntoSheetsRouter=require('./routes/Sheets/AddQuestionToSheet.routes');
 
 
 
@@ -42,8 +43,10 @@ app.use('/api/user',LoginUserRoute)
 
 // sheet 
 
-app.use('/api/sheet',DefaultSheet);
+
+app.use('/api/sheet',Sheets);
 app.use('/api/sheet',PrepareCompleteSheetUsingIdRouter);
+app.use('/api/sheet',AddQuestionsIntoSheetsRouter);
 
 
 

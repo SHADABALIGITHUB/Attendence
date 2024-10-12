@@ -1,62 +1,103 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
+import FetchInstance from '../fetchInstance/Fetch';
+
+//  interface topicTagSchema{
+//     name: string,
+//     id:string,
+//     slug:string,
+//   };
 
 
- interface topicTagSchema{
-    name: string,
-    id:string,
-    slug:string,
-  };
+// interface Question_Sheet{
+// _id: string,  
+// acRate: string,
+// difficulty:"Hard"|"Medium"|"Easy",
+// freqBar:string,
+// frontendQuestionId:number,
+// isFavor: boolean,
+// paidOnly: boolean,
+// status: string,
+// title: string,
+// titleSlug: string,
+// link:string,
+// topicTags: topicTagSchema[],
+// hasSolution: boolean,
+// hasVideoSolution: boolean,
+// }
+import  {UserSheetType} from '../components/Dashboard/DashboardContainer'
+import { AuthStatus } from './Auth';
 
-
-interface Question_Sheet{
-_id: string,  
-acRate: string,
-difficulty:"Hard"|"Medium"|"Easy",
-freqBar:string,
-frontendQuestionId:number,
-isFavor: boolean,
-paidOnly: boolean,
-status: string,
-title: string,
-titleSlug: string,
-link:string,
-topicTags: topicTagSchema[],
-hasSolution: boolean,
-hasVideoSolution: boolean,
-}
 interface QuestionSheetContextType{
-    SheetData:Question_Sheet[],
-    setSheetData:React.Dispatch<React.SetStateAction<Question_Sheet[]>>
+    UserSheetsData:UserSheetType[],
+    setUserSheetsData:React.Dispatch<React.SetStateAction<UserSheetType[]>>
 }
 
-export const SheetDataContext= createContext<QuestionSheetContextType>({
-    SheetData:[],
-    setSheetData:()=>{},
+export const UserSheetsDataContext= createContext<QuestionSheetContextType>({
+    UserSheetsData:[],
+    setUserSheetsData:()=>{},
 });
 
 // Create a provider component
-export const SheetDataProvider:React.FC<{children:React.ReactNode}> = ({ children }) => {
-    const [SheetData, setSheetData] = useState<Question_Sheet[]>([]);
+const UserSheetsDataProvider:React.FC<{children:React.ReactNode}> = ({ children }) => {
+    const [UserSheetsData, setUserSheetsData] = useState<UserSheetType[]>([]);
+   
+    const {authStatus}=useContext(AuthStatus);
+          
+       const email=sessionStorage.getItem('email');
+       
+     
+     
+  
 
-    useEffect(() => {
-        // Fetch data from user sheets
-        const fetchSheetData = async () => {
-            try {
-                // Replace this URL with your actual endpoint
-                const response = await fetch('YOUR_SHEETS_API_URL');
-                const data = await response.json();
-                setSheetData(data);
-            } catch (error) {
-                console.error("Error fetching card data:", error);
+    useEffect(()=>{
+        
+    
+         if(!email){
+            return ;
+         }
+        const CallApi =async()=>{
+
+          try{
+            const response=await FetchInstance(`/api/sheet/user/${email}`,{
+              method:"GET"
+            })
+
+            if(response.status){
+
+                setUserSheetsData(response.data);
+                console.log(response);
+                
+
             }
-        };
+            else{
 
-        fetchSheetData();
-    }, []);
+               console.log("somthing Wrong ");
+
+            }
+
+          }
+          catch(err){
+
+              console.log("Err 501 server issue",err);
+
+          }
+
+        }
+
+        CallApi();
+
+        
+        
+       
+
+     },[authStatus]);
 
     return (
-        <SheetDataContext.Provider value={{ SheetData,setSheetData }}>
+        <UserSheetsDataContext.Provider value={{ UserSheetsData,setUserSheetsData }}>
             {children}
-        </SheetDataContext.Provider>
+        </UserSheetsDataContext.Provider>
     );
 };
+
+
+export default UserSheetsDataProvider;

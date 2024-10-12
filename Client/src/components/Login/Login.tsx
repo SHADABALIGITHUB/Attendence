@@ -37,6 +37,7 @@ const Login:React.FC = () => {
 
             if(response.status){
                  sessionStorage.setItem('token',response.token);
+                 sessionStorage.setItem('email',email);
                  setAuthStatus(true);
                  navigate('/dashboard');
             }

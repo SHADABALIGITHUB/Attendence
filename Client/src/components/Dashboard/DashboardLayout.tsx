@@ -62,7 +62,7 @@ const DashboardLayout = () => {
          <List>
            {['All mail', 'Trash', 'Logout'].map((text, index) => (
              <ListItem key={text} disablePadding>
-               <ListItemButton onClick={()=>{ sessionStorage.removeItem('token'); setAuthStatus(false); navigate('/login');}}>
+               <ListItemButton onClick={()=>{ sessionStorage.removeItem('token'); sessionStorage.removeItem('email'); setAuthStatus(false); navigate('/login');}}>
                  <ListItemIcon>
                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
                  </ListItemIcon>

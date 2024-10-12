@@ -36,8 +36,8 @@ function App() {
 
           <Route path='/' element={authStatus?<DashboardLayout/>:<Navigate to="/login" replace />}>
             
-              <Route path="/dashboard" element={authStatus?<Dashboard/>:<Navigate to="/login" replace />} />
-              <Route path='/create-sheet' element={authStatus?<CreateSheet/>:<Navigate to="/login" replace />} />
+              <Route path="/dashboard" element={<Dashboard/>} />
+              <Route path='/create-sheet' element={<CreateSheet/>} />
               <Route path="/create-sheet-table" element={<TableForAdding/>} />
               <Route path="/view-sheet" element={<ViewSheet/>}/>
        
@@ -47,7 +47,8 @@ function App() {
        
       </Route>
       <Route path='*' element={<h2> Notfound </h2>}></Route>
-      {/* <Route path='/create-sheet-dev' element={<CreateSheet/>} /> */}
+     
+      
 
 
      </Routes>
