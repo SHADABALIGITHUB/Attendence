@@ -11,6 +11,7 @@ import TextField from '@mui/material/TextField';
 import Checkbox from '@mui/material/Checkbox';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import { Typography } from '@mui/material';
 
 function createData(
   sno: number,
@@ -43,12 +44,13 @@ const rows = [
  const TableForAdding:React.FC=()=> {
   return (
 
-    <>    
+    <Box sx={{marginTop:'100px', display:'flex'}}> 
     <Box>
 
         <TextField label="Search ..Question" ></TextField>
 
         <FormGroup>
+        <FormControlLabel control={<Checkbox />} label="Select All" />
         <FormControlLabel control={<Checkbox />} label="Easy" />
         <FormControlLabel control={<Checkbox />} label="Medium" />
         <FormControlLabel control={<Checkbox />} label="Hard" />
@@ -85,7 +87,7 @@ const rows = [
     </Box>
     
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650,marginTop:'100px' }} aria-label="simple table">
+      <Table sx={{ minWidth: 650}} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>S.no </TableCell>
@@ -107,7 +109,7 @@ const rows = [
               <TableCell align="center">{row.questionNo}</TableCell>
               <TableCell align="center">{row.questionName}</TableCell>
               <TableCell align="center">{row.difficulty}</TableCell>
-              <TableCell align="center">{row.topic.map((item)=><h2>{item}</h2>)}</TableCell>
+              <TableCell sx={{display:'flex',gap:'2px'}} align="center">{row.topic.map((item)=><Typography>{item}</Typography>)}</TableCell>
               <TableCell align="center">{row.status?"Solved":"Unsolved"}</TableCell>
               <TableCell align="center">{row.review?"Review":""}</TableCell>
              
@@ -119,7 +121,7 @@ const rows = [
       </Table>
     </TableContainer>
 
-    </>
+    </Box>
 
   );
 }

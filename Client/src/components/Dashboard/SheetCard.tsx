@@ -32,8 +32,9 @@ const SheetCard:React.FC<SheetCardProps> = ({data}) => {
       </Typography>
     </CardContent>
     <CardActions>
-      <Button size="small">Share(Future) </Button>
+      
       <Button size="small" onClick={()=>{ navigate('/view-sheet',{ state: { Listquestion:data.Listquestion} })      }  }> Open </Button>
+      <Button size="small" onClick={()=>{ navigate('/create-sheet-table')}} > Add Questions  </Button>
     </CardActions>
   </Card>
   )
