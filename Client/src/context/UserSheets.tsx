@@ -1,29 +1,7 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import FetchInstance from '../fetchInstance/Fetch';
 
-//  interface topicTagSchema{
-//     name: string,
-//     id:string,
-//     slug:string,
-//   };
 
-
-// interface Question_Sheet{
-// _id: string,  
-// acRate: string,
-// difficulty:"Hard"|"Medium"|"Easy",
-// freqBar:string,
-// frontendQuestionId:number,
-// isFavor: boolean,
-// paidOnly: boolean,
-// status: string,
-// title: string,
-// titleSlug: string,
-// link:string,
-// topicTags: topicTagSchema[],
-// hasSolution: boolean,
-// hasVideoSolution: boolean,
-// }
 import  {UserSheetType} from '../components/Dashboard/DashboardContainer'
 import { AuthStatus } from './Auth';
 

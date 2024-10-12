@@ -27,6 +27,7 @@ const Sheets=require('./routes/Sheets/AllSheet.routes');
 const GetQuestionRouter=require('./routes/Sheets/GetQuesionWithID.routes');
 const PrepareCompleteSheetUsingIdRouter=require('./routes/Sheets/PrepareCompleteSheetUsingId.routes');
 const AddQuestionsIntoSheetsRouter=require('./routes/Sheets/AddQuestionToSheet.routes');
+const GetAllQuestionsRoute=require('./routes/Sheets/GetAllQuestions.routes')
 
 
 
@@ -53,6 +54,8 @@ app.use('/api/sheet',AddQuestionsIntoSheetsRouter);
 //  question getting 
 
 app.use('/api/question',GetQuestionRouter);
+app.use('/api/question',GetAllQuestionsRoute);
+
 
 // admin route only
 app.use('/pro',problemsetQuestionList);
