@@ -23,6 +23,7 @@ const CollectionSheet=new mongoose.Schema({
         default: Date.now,
      },
      userId:String,
+     sheetImg:String,
 })
 
 CollectionSheet.plugin(AutoIncrement, { inc_field: 'sheetid' });

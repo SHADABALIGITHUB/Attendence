@@ -86,7 +86,7 @@ sx={{
 
        <Button type='submit' variant="contained" sx={{maxWidth:'300px',minWidth:'100px'}}> login </Button>
         <MuiLink sx={{fontSize:{xs:'12px',md:'14px'}}} component={RouterLink} to="/register" underline="hover">
-        Already have an account? Log in
+        Don't have an account? Register
        </MuiLink>
 
      

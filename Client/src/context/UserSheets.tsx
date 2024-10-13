@@ -2,7 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from 'react';
 import FetchInstance from '../fetchInstance/Fetch';
 
 
-import  {UserSheetType} from '../components/Dashboard/DashboardContainer'
+import  {UserSheetType} from '../components/Dashboard/Dashboard'
 import { AuthStatus } from './Auth';
 
 interface QuestionSheetContextType{

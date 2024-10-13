@@ -4,7 +4,7 @@ const DefaultSheetEnter=(Sheets)=> async (req,res)=>{
 
       try{
 
-       const {title,useremail}=req.body;
+       const {title,useremail,sheetImg}=req.body;
       
       
 
@@ -13,6 +13,7 @@ const DefaultSheetEnter=(Sheets)=> async (req,res)=>{
         Listquestion:[],
         title:title,
         userId:useremail,
+        sheetImg:sheetImg,
 
         
 

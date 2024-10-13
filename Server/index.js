@@ -5,11 +5,14 @@ const cors=require('cors');
 
 
 const app = express();
+
+//  cors allow all  while in dev phase 
 app.use(cors('*'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
+//  mongo db connect
 const mongooseConnect = require('./config/database');
 mongooseConnect();
 
@@ -18,7 +21,7 @@ mongooseConnect();
 
 
 
-//  routes 
+//  routes import 
 const problemsetQuestionList=require('./routes/ProblemLIst.routes');
 const CreateUserRoute=require('./routes/Auth/CreateUser.routes');
 const OtpVerificationRouter=require('./routes/Auth/OtpVerification.routes')
@@ -37,14 +40,13 @@ app.get('/', (req, res) => {
        res.send("working ")
      
 });
+
 // user 
 app.use('/api/user',CreateUserRoute);
 app.use('/api/user',OtpVerificationRouter);
 app.use('/api/user',LoginUserRoute)
 
 // sheet 
-
-
 app.use('/api/sheet',Sheets);
 app.use('/api/sheet',PrepareCompleteSheetUsingIdRouter);
 app.use('/api/sheet',AddQuestionsIntoSheetsRouter);

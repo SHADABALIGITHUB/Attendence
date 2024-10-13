@@ -6,7 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import  { UserSheetType } from './DashboardContainer';
+import  { UserSheetType } from './Dashboard';
 import { useNavigate } from 'react-router-dom';
 interface SheetCardProps {
   data: UserSheetType; // Accepts an array of UserSheetType
@@ -17,7 +17,7 @@ const SheetCard:React.FC<SheetCardProps> = ({data}) => {
     <Card sx={{ maxWidth: 345,minWidth:280 }}>
     <CardMedia
       sx={{ height: 140 }}
-      image={data.sheetid==3?"https://res.cloudinary.com/ddnum51yo/image/upload/v1728586195/Leetcode/DefaultSheet/download_pb5ozu.jpg":'./images/Cards/code1.jpg'}
+      image={data.sheetImg?data.sheetImg:'./images/Cards/code1.jpg'}
       title="green iguana"
     />
     <CardContent>

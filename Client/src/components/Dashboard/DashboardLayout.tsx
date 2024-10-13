@@ -24,6 +24,8 @@ const DashboardLayout = () => {
  
     const {setAuthStatus}=React.useContext(AuthStatus);
     const [open, setOpen] = React.useState(false);
+   
+    
     const handleDrawerClose = () => {
         setOpen(false);
       };

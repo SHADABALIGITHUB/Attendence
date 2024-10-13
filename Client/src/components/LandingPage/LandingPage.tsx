@@ -36,7 +36,7 @@ const LandingPage:React.FC = () => {
     
        <>
       
-      <h2 style={{color:'red'}} >Hwlo {authStatus?"Welcome":"login Please"}</h2>
+      <h2 style={{color:'red'}} >Hello, {authStatus?"Welcome":"Login Please"}</h2>
        
       <RouterLink to="/login" ><Item>  Login Your Account </Item></RouterLink>
     <RouterLink to="/register"><Item>  Register New User </Item> </RouterLink> 

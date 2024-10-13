@@ -1,19 +1,13 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
-import {QuestionDetail} from '../DashboardContainer';
+import {QuestionDetail} from '../Dashboard';
 import { TableContainer,Table,TableHead,TableBody,TableCell,TableRow,Paper } from '@mui/material';
 const ViewSheet:React.FC = () => {
 
      const location=useLocation();
      const ListQuestion:QuestionDetail[]=location.state?.Listquestion;
 
-    //  useEffect(()=>{
-
-         
-         
-         
-
-    //  },[])
+    
     
   
   return (

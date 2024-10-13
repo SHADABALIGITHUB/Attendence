@@ -12,6 +12,7 @@ const CreateSheet:React.FC = () => {
    const navigate=useNavigate();
 
    const [sheettitle,setSheetTittle]=useState<string>('');
+   const [sheetImg,setSheetImg]=useState<string>('');
    const useremail=sessionStorage.getItem('email');
 
     const handle=async ()=>{
@@ -27,11 +28,11 @@ const CreateSheet:React.FC = () => {
            })
 
            if(AddSheetTodatabase.status){
-              console.log("working1");
+             
               navigate('/dashboard');
            }
 
-           console.log("working2");
+        
 
 
            
