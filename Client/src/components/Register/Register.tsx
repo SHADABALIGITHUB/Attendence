@@ -36,7 +36,7 @@ const Register:React.FC = () => {
        
 
         
-        console.log(user.status);
+        // console.log(user.status);
 
         if(user.status){
             navigate('/register-verify',{ state: { email: email } });

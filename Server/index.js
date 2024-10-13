@@ -8,7 +8,8 @@ const app = express();
 
 //  cors allow all  while in dev phase 
 app.use(cors('*'));
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(express.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
@@ -31,7 +32,7 @@ const GetQuestionRouter=require('./routes/Sheets/GetQuesionWithID.routes');
 const PrepareCompleteSheetUsingIdRouter=require('./routes/Sheets/PrepareCompleteSheetUsingId.routes');
 const AddQuestionsIntoSheetsRouter=require('./routes/Sheets/AddQuestionToSheet.routes');
 const GetAllQuestionsRoute=require('./routes/Sheets/GetAllQuestions.routes')
-
+const ImageUploadedToCloudRouter=require('./routes/ImageUploadedToCloud.routes');
 
 
 // Define a sample route
@@ -50,7 +51,7 @@ app.use('/api/user',LoginUserRoute)
 app.use('/api/sheet',Sheets);
 app.use('/api/sheet',PrepareCompleteSheetUsingIdRouter);
 app.use('/api/sheet',AddQuestionsIntoSheetsRouter);
-
+app.use('/api/sheet',ImageUploadedToCloudRouter);
 
 
 //  question getting 

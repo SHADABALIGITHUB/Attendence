@@ -13,6 +13,7 @@ import { AuthStatus } from './context/Auth';
 import DashboardLayout from './components/Dashboard/DashboardLayout';
 import TableForAdding from './components/CreateSheet/TableForAdding';
 import ViewSheet from './components/Dashboard/Sheets/ViewSheet';
+import ImgaeUploader from './components/Imageuploader/ImageInput';
 
 
 
@@ -46,6 +47,7 @@ function App() {
        
        
       </Route>
+      {/* <Route path="/imge" element={<ImgaeUploader/>}></Route> */}
       <Route path='*' element={<h2> Notfound </h2>}></Route>
      
       
