@@ -12,7 +12,7 @@ const CreateSheet:React.FC = () => {
    const navigate=useNavigate();
 
    const [sheettitle,setSheetTittle]=useState<string>('');
-   const [sheetImg,setSheetImg]=useState<string>('');
+   // const [sheetImg,setSheetImg]=useState<string>('');
    const useremail=sessionStorage.getItem('email');
 
     const handle=async ()=>{
