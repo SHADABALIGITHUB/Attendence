@@ -16,9 +16,10 @@ _id: string,
 Listquestion: QuestionDetail[],
 title: string,
 userId: string,
+sheetImg:string,
 createdAt: string,
-sheetid: number,
-sheetImg:string
+sheetid: number
+
 }
 
 const Dashboard: React.FC = () => {

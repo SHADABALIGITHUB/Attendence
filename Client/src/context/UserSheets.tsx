@@ -8,18 +8,20 @@ import { AuthStatus } from './Auth';
 interface QuestionSheetContextType{
     UserSheetsData:UserSheetType[],
     setUserSheetsData:React.Dispatch<React.SetStateAction<UserSheetType[]>>
+    refreshSheets: () => void 
 }
 
 export const UserSheetsDataContext= createContext<QuestionSheetContextType>({
     UserSheetsData:[],
     setUserSheetsData:()=>{},
+    refreshSheets: () => {}
 });
 
 // Create a provider component
 const UserSheetsDataProvider:React.FC<{children:React.ReactNode}> = ({ children }) => {
     const [UserSheetsData, setUserSheetsData] = useState<UserSheetType[]>([]);
    
-    const {authStatus}=useContext(AuthStatus);
+     const {authStatus}=useContext(AuthStatus);
           
        const email=sessionStorage.getItem('email');
        
@@ -27,13 +29,15 @@ const UserSheetsDataProvider:React.FC<{children:React.ReactNode}> = ({ children 
      
   
 
-    useEffect(()=>{
-        
+ 
     
-         if(!email){
-            return ;
-         }
+        
+
         const CallApi =async()=>{
+
+            if(!email){
+                return ;
+             }
 
           try{
             const response=await FetchInstance(`/api/sheet/user/${email}`,{
@@ -43,7 +47,7 @@ const UserSheetsDataProvider:React.FC<{children:React.ReactNode}> = ({ children 
             if(response.status){
 
                 setUserSheetsData(response.data);
-                // console.log(response);
+               
                 
 
             }
@@ -62,6 +66,13 @@ const UserSheetsDataProvider:React.FC<{children:React.ReactNode}> = ({ children 
 
         }
 
+        const refreshSheets = () => {
+            CallApi();
+          };
+
+  useEffect(()=>{
+        
+
         CallApi();
 
         
@@ -71,7 +82,7 @@ const UserSheetsDataProvider:React.FC<{children:React.ReactNode}> = ({ children 
      },[authStatus]);
 
     return (
-        <UserSheetsDataContext.Provider value={{ UserSheetsData,setUserSheetsData }}>
+        <UserSheetsDataContext.Provider value={{ UserSheetsData,setUserSheetsData,refreshSheets }}>
             {children}
         </UserSheetsDataContext.Provider>
     );

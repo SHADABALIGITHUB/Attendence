@@ -1,17 +1,19 @@
-import React, {useState } from 'react'
+import React, {useContext, useState } from 'react'
 import { Box } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
-
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import {style} from '../../styles/login';
 import FetchInstance from '../../fetchInstance/Fetch';
 import ImageInput from '../Imageuploader/ImageInput';
+import {UserSheetsDataContext} from '../../context/UserSheets';
 
 const CreateSheet:React.FC = () => {
    const navigate=useNavigate();
 
+   
+  const {refreshSheets}=useContext(UserSheetsDataContext);
    const [sheettitle,setSheetTittle]=useState<string>('');
    const [selectedImage, setSelectedImage] = useState<string|null>(null);
    const [imageName, setImageName] = useState('');
@@ -22,8 +24,10 @@ const CreateSheet:React.FC = () => {
    
 
     const handle=async (e:React.FormEvent<HTMLFormElement>)=>{
+
+         e.preventDefault();
  
-        console.log(e.target);
+      //   console.log({"name":imageName,image:selectedImage});
         
       const RandomImage = [
          "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -32,7 +36,7 @@ const CreateSheet:React.FC = () => {
      ];
      let randomIndex = Math.floor(Math.random() * RandomImage.length);  
     
-     let UrlFromCloud = RandomImage[randomIndex];
+      let UrlFromCloud = RandomImage[randomIndex];
 
         try{
           const UploadeImage= await FetchInstance('/api/sheet/image',{
@@ -40,9 +44,15 @@ const CreateSheet:React.FC = () => {
             body:JSON.stringify({name:imageName,image:selectedImage})
           })
 
+         
+          
+
             
          if(UploadeImage.status){
+           
             UrlFromCloud=UploadeImage.url;
+            setSelectedImage(null);
+            setImageName("");
          }
          
            const AddSheetTodatabase= await FetchInstance('/api/sheet/user',{
@@ -53,8 +63,10 @@ const CreateSheet:React.FC = () => {
            })
 
            if(AddSheetTodatabase.status){
-             
+
+              refreshSheets();  
               navigate('/dashboard');
+
            }
 
         

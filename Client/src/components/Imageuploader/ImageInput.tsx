@@ -16,10 +16,9 @@ const ImageInput:React.FC<ImageInputType> = ({selectedImage,setSelectedImage,ima
  
   
   const handleImageChange = (event:React.ChangeEvent<HTMLInputElement>) => {
-     if(event.target.files){
-
+    
      
-    const file = event.target.files[0];
+    const file = event.target.files?.[0];
    
     if (file) {
       const reader = new FileReader();
@@ -29,7 +28,7 @@ const ImageInput:React.FC<ImageInputType> = ({selectedImage,setSelectedImage,ima
       };
       reader.readAsDataURL(file);
     }
-}
+
   };
   
   const Cancel=()=>{

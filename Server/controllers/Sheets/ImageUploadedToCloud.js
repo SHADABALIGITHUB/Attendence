@@ -13,12 +13,14 @@ const ImageUploadedToCloud= async (req,res)=>{
 
    const {name,image}=req.body;
     if(!image){
-        return res.status(201).json({status:false});
+        return res.status(400).json({status:false});
     }
     try {
         
         const base64Image = image.split(';base64,').pop();
-        const result = await cloudinary.uploader.upload(`data:image/png;base64,${base64Image}`);
+        const result = await cloudinary.uploader.upload(`data:image/png;base64,${base64Image}`,{
+          folder: 'LeetCode',
+        });
      
         
            
