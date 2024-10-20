@@ -15,6 +15,8 @@ import { Typography } from '@mui/material';
 import Button from '@mui/material/Button';
 import Link from '@mui/material/Link';
 import FetchInstance from '../../fetchInstance/Fetch';
+import { useLocation } from 'react-router-dom';
+import { UserSheetsDataContext } from '../../context/UserSheets';
 
 
 
@@ -50,10 +52,73 @@ hasVideoSolution: boolean,
 
 
  const TableForAdding:React.FC=()=> {
-
+    const location= useLocation();
     const [page,setPage]=React.useState('1');
     const limit=10
     const[rows,setRows]=React.useState<Question_Sheet[]|null>(null);
+    const sheetid:number=location.state?.sheetid;
+  
+     const {refreshSheets}=React.useContext(UserSheetsDataContext)
+
+
+
+   const  AddQuestion= async (e:React.MouseEvent<HTMLButtonElement, MouseEvent> ,row:Question_Sheet,sheetid:number)=>{
+         
+       e.preventDefault();
+     
+       
+      try{
+      const response = await FetchInstance('/api/sheet/user/add-question',{
+            method:"POST",
+            body:JSON.stringify({
+              row:row,
+              sheetid: sheetid
+          })
+
+        })
+
+      
+
+        if(response.message==="List not found"){
+          alert("No Sheet please do it again ");
+        }
+        else if(response.message==="Question Already in List"){
+          alert("Question Already in List");
+        }
+        else if(response.message==="Issue in adding"){
+          alert("Issue in adding");
+        }
+        else if(response.message==="Updation done"){
+           
+            alert("added Question to Sheet");
+            refreshSheets();
+
+
+        }
+
+
+          
+      }
+        catch(err){
+
+           alert("server error try after sometime")
+
+        }
+
+           
+
+          
+
+
+           
+
+
+     
+
+    
+    
+
+    }
 
 
     
@@ -181,14 +246,14 @@ hasVideoSolution: boolean,
                 Visit
               </Link> 
              </TableCell>
-              <TableCell sx={{minHeight:'100px'}}> <Button>Add </Button> </TableCell>
+              <TableCell sx={{minHeight:'100px'}}> <Button onClick={(e)=>AddQuestion(e,row,sheetid)} >Add </Button> </TableCell>
              
             
              
             </TableRow>
           ))}
            <TableRow>
-           <TableCell colSpan={6} align="left"> 
+           <TableCell colSpan={6} align="center"> 
                            
                             <Button onClick={() => setPage(prev => prev=='1'?prev:String(parseInt(prev) - 1))}>Prev Page</Button>
                             <Button onClick={() => setPage(prev => String(parseInt(prev) + 1))}>Next Page</Button>

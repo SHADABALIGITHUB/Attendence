@@ -34,7 +34,7 @@ const SheetCard:React.FC<SheetCardProps> = ({data}) => {
     <CardActions>
       
       <Button size="small" onClick={()=>{ navigate('/view-sheet',{ state: { Listquestion:data.Listquestion} })      }  }> Open </Button>
-      <Button size="small" onClick={()=>{ navigate('/create-sheet-table')}} > Add Questions  </Button>
+      <Button size="small" onClick={()=>{ navigate('/create-sheet-table',{state:{sheetid:data.sheetid}})}} > Add Questions  </Button>
     </CardActions>
   </Card>
   )

@@ -5,10 +5,29 @@ import { DefaultSheetDataContext } from '../../context/DefaultSheets';
 import { currentPageStateContext } from '../../context/CurrentPageState';
 
 
+interface TopicTag {
+  name: string;
+  id: string;
+  slug: string;
+}
 export interface QuestionDetail{
-  questionid: number,
-  questionName:string,
-  _id:string
+ 
+    acRate: string;
+    difficulty: string;
+    freqBar: number | null; // Assuming freqBar can be null
+    frontendQuestionId: number;
+    isFavor: boolean;
+    paidOnly: boolean;
+    status: string | null; // Assuming status can be null
+    title: string;
+    titleSlug: string;
+    link: string;
+    topicTags: TopicTag[] // Assuming topicTags is an array of strings
+    hasSolution: boolean;
+    hasVideoSolution: boolean;
+    _id: string;
+    __v: number;
+
 }
 
 export interface UserSheetType{

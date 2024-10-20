@@ -39,6 +39,7 @@ const CreateSheet:React.FC = () => {
       let UrlFromCloud = RandomImage[randomIndex];
 
         try{
+         if(selectedImage){
           const UploadeImage= await FetchInstance('/api/sheet/image',{
             method:"POST",
             body:JSON.stringify({name:imageName,image:selectedImage})
@@ -54,6 +55,7 @@ const CreateSheet:React.FC = () => {
             setSelectedImage(null);
             setImageName("");
          }
+      }
          
            const AddSheetTodatabase= await FetchInstance('/api/sheet/user',{
              method:"POST",

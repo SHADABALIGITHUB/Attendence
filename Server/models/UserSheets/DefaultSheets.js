@@ -1,15 +1,9 @@
 const mongoose=require('mongoose');
-const { Question } = require('../Problems/Leetcodeproblem');
 const AutoIncrement=require('mongoose-sequence')(mongoose);
-
-const Question_Sheet=new mongoose.Schema({
-     questionid:Number,
-     questionName:String,
-    
-})
+const {Question_Schema}=require('../Problems/Leetcodeproblem')
 
 const CollectionSheet=new mongoose.Schema({
-    Listquestion:[Question_Sheet],
+    Listquestion:[Question_Schema],
     title: {
         type: String,
         required: true,

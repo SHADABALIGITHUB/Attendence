@@ -41,8 +41,8 @@ const ImageInput:React.FC<ImageInputType> = ({selectedImage,setSelectedImage,ima
 
     <>
      {selectedImage && (
-        <Box sx={{ mt: 2 }}>
-          <Button onClick={Cancel}>< CloseIcon/> </Button>
+        <Box sx={{ mt: 2 ,position:"relative"}}>
+          <Button sx={{position:'absolute',left:'100%'}} onClick={Cancel}>< CloseIcon/> </Button>
           <Typography variant="body2">Image Preview:</Typography>
           <img src={selectedImage} alt="Preview" style={{ maxWidth: '400px', maxHeight: '300px', marginTop: '10px' }} />
         </Box>
