@@ -13,6 +13,7 @@ import { AuthStatus } from './context/Auth';
 import DashboardLayout from './components/Dashboard/DashboardLayout';
 import TableForAdding from './components/CreateSheet/TableForAdding';
 import ViewSheet from './components/Dashboard/Sheets/ViewSheet';
+import AdminCreateSheet from './components/CreateSheet/AdminCreateSheet';
 
 
 
@@ -30,7 +31,7 @@ function App() {
     <Routes>
       <Route path='/' element={<Layout/>}>
       
-       <Route path='/' element={<LandingPage/>}/>
+       <Route path='/' element={authStatus?<Navigate to="/dashboard" replace/>:<LandingPage/>}/>
        <Route path='/login' element={authStatus?<Navigate to="/dashboard" replace/>:<Login/>}/>
        <Route path='/register' element={authStatus?<Navigate to="/dashboard" replace/>:<Register/>}/>
        <Route path='/register-verify' element={authStatus?<Navigate to="/dashboard" replace/>:<Verify/>}/>
@@ -41,6 +42,7 @@ function App() {
               <Route path='/create-sheet' element={<CreateSheet/>} />
               <Route path="/create-sheet-table" element={<TableForAdding/>} />
               <Route path="/view-sheet" element={<ViewSheet/>}/>
+              <Route path='/admin-create-sheet' element={sessionStorage.getItem('email')==='shadab89@gmail.com'?<AdminCreateSheet/>:<CreateSheet/>}/>
        
           </Route>
        

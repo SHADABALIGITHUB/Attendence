@@ -33,7 +33,6 @@ const Question_Schema= new mongoose.Schema({
 "frontendQuestionId": {
     
     type:Number,
-    unique:true,
     required:true,
 },
 "isFavor": {

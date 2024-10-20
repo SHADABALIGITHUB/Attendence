@@ -9,9 +9,12 @@ import Typography from '@mui/material/Typography';
 import  { UserSheetType } from './Dashboard';
 import { useNavigate } from 'react-router-dom';
 interface SheetCardProps {
-  data: UserSheetType; // Accepts an array of UserSheetType
+  data: UserSheetType; 
+  SheetType:string;
+
+ 
 }
-const SheetCard:React.FC<SheetCardProps> = ({data}) => {
+const SheetCard:React.FC<SheetCardProps> = ({SheetType,data}) => {
    const navigate=useNavigate();
   return (
     <Card sx={{ maxWidth: 345,minWidth:280 }}>
@@ -33,8 +36,9 @@ const SheetCard:React.FC<SheetCardProps> = ({data}) => {
     </CardContent>
     <CardActions>
       
-      <Button size="small" onClick={()=>{ navigate('/view-sheet',{ state: { Listquestion:data.Listquestion} })      }  }> Open </Button>
-      <Button size="small" onClick={()=>{ navigate('/create-sheet-table',{state:{sheetid:data.sheetid}})}} > Add Questions  </Button>
+      <Button size="small" onClick={()=>{ navigate('/view-sheet',{ state: { Listquestion:data.Listquestion} })}  }> Open </Button>
+
+      {SheetType==='MySheet'?<Button size="small"  onClick={()=>{ navigate('/create-sheet-table',{state:{sheetid:data.sheetid}})}} > Add Questions  </Button> : sessionStorage.getItem('email')==='shadab89@gmail.com'?<Button size="small"  onClick={()=>{ navigate('/create-sheet-table',{state:{sheetid:data.sheetid,sheetType:SheetType}})}} > Add Questions  </Button>:<Button disabled={true} > Add Questions  </Button> }
     </CardActions>
   </Card>
   )

@@ -33,10 +33,10 @@ const SheetCardViewInDashboard:React.FC<SheetFormateType> = ({UserSheetsData,She
 
   <TableBody>
      
-      <TableRow  sx={{display:'flex',flexWrap:'wrap',justifyContent:'center'}}>
-        <TableCell sx={{display:'flex',flexWrap:'wrap',gap:'15px'}}>
+      <TableRow  sx={{display:'flex', flexWrap:'wrap',justifyContent:'center'}}>
+        <TableCell sx={{display:'flex',flexWrap:'wrap',gap:'15px',justifyContent:'center'}}>
         {
-        UserSheetsData.length!=0?UserSheetsData.map((item,index)=><SheetCard key={index} data={item}/>):<h2 style={{color:'primary'}}>No Sheet Yet</h2>
+        UserSheetsData.length!=0?UserSheetsData.map((item,index)=><SheetCard SheetType={SheetType} key={index} data={item}/>):<h2 style={{color:'primary'}}>No Sheet Yet</h2>
 
         }   
 

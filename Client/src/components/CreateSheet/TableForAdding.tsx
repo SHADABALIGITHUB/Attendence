@@ -57,6 +57,9 @@ hasVideoSolution: boolean,
     const limit=10
     const[rows,setRows]=React.useState<Question_Sheet[]|null>(null);
     const sheetid:number=location.state?.sheetid;
+    const sheetType:string=location.state?.sheetType;
+
+
   
      const {refreshSheets}=React.useContext(UserSheetsDataContext)
 
@@ -67,8 +70,11 @@ hasVideoSolution: boolean,
        e.preventDefault();
      
        
-      try{
-      const response = await FetchInstance('/api/sheet/user/add-question',{
+      try{ 
+        let response;
+
+        if(sheetType==="Default"){
+        response = await FetchInstance('/api/sheet/user/add-question',{
             method:"POST",
             body:JSON.stringify({
               row:row,
@@ -76,6 +82,22 @@ hasVideoSolution: boolean,
           })
 
         })
+      }else{
+
+         response = await FetchInstance('/api/sheet/add-question',{
+          method:"POST",
+          body:JSON.stringify({
+            row:row,
+            sheetid: sheetid
+        })
+
+      })
+
+
+
+         
+
+      }
 
       
 

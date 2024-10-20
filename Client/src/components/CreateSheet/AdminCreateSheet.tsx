@@ -9,7 +9,7 @@ import FetchInstance from '../../fetchInstance/Fetch';
 import ImageInput from '../Imageuploader/ImageInput';
 import {UserSheetsDataContext} from '../../context/UserSheets';
 
-const CreateSheet:React.FC = () => {
+const AdminCreateSheet:React.FC = () => {
    const navigate=useNavigate();
 
    
@@ -57,7 +57,7 @@ const CreateSheet:React.FC = () => {
          }
       }
          
-           const AddSheetTodatabase= await FetchInstance('/api/sheet/user',{
+           const AddSheetTodatabase= await FetchInstance('/api/sheet/default',{
              method:"POST",
              body:JSON.stringify({title:sheettitle,useremail:useremail,sheetImg:UrlFromCloud})
 
@@ -105,7 +105,7 @@ const CreateSheet:React.FC = () => {
 
        >
 
-<Typography variant='h4' sx={ { color: '#068fb4',fontSize:{xs:'20px',sm:'30px',md:'30px'} }}  component='h6' gutterBottom> Create Sheet </Typography>
+<Typography variant='h4' sx={ { color: '#068fb4',fontSize:{xs:'20px',sm:'30px',md:'30px'} }}  component='h6' gutterBottom> Create Public Sheet </Typography>
        
 
       
@@ -125,4 +125,4 @@ const CreateSheet:React.FC = () => {
   )
 }
 
-export default CreateSheet;
+export default AdminCreateSheet;
