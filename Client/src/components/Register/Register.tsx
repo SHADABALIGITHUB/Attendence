@@ -35,15 +35,14 @@ const Register:React.FC = () => {
         })
        
 
-        
-        // console.log(user.status);
+      
 
         if(user.status){
             navigate('/register-verify',{ state: { email: email } });
         }
         
 
-        // console.log(data);
+        
     }
     catch(err){
         console.error('There was a problem with the fetch operation:', err); // Error handling

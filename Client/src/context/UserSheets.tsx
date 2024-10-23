@@ -4,6 +4,7 @@ import FetchInstance from '../fetchInstance/Fetch';
 
 import  {UserSheetType} from '../components/Dashboard/Dashboard'
 import { AuthStatus } from './Auth';
+import {currentPageStateContext} from './CurrentPageState';
 
 interface QuestionSheetContextType{
     UserSheetsData:UserSheetType[],
@@ -22,8 +23,9 @@ const UserSheetsDataProvider:React.FC<{children:React.ReactNode}> = ({ children 
     const [UserSheetsData, setUserSheetsData] = useState<UserSheetType[]>([]);
    
      const {authStatus}=useContext(AuthStatus);
+     const {currentstate}=useContext(currentPageStateContext);
           
-       const email=sessionStorage.getItem('email');
+       const email=localStorage.getItem('email');
        
      
      
@@ -79,7 +81,7 @@ const UserSheetsDataProvider:React.FC<{children:React.ReactNode}> = ({ children 
         
        
 
-     },[authStatus]);
+     },[authStatus,currentstate]);
 
     return (
         <UserSheetsDataContext.Provider value={{ UserSheetsData,setUserSheetsData,refreshSheets }}>

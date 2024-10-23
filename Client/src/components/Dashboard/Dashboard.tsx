@@ -48,10 +48,10 @@ const Dashboard: React.FC = () => {
    const {currentstate}=useContext(currentPageStateContext);
 
   
-
+   
   return (
       <>      
-       {currentstate==="DefaultSheet"? <SheetCardViewInDashboard SheetType="Default" UserSheetsData={DefaultSheetData}/>:currentstate==="UserSheet"?<SheetCardViewInDashboard SheetType="MySheet" UserSheetsData={UserSheetsData}/>:<h2> Welcome to Dashboard</h2>}
+       {currentstate==="DefaultSheet"? <SheetCardViewInDashboard SheetType="Default" UserSheetsData={DefaultSheetData}/>:currentstate==="UserSheet"?<SheetCardViewInDashboard SheetType="UserSheet" UserSheetsData={UserSheetsData}/>:<h2> Welcome to Dashboard</h2>}
       </>
 
 

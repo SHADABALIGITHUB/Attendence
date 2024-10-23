@@ -15,13 +15,13 @@ const AuthStatusProvider:React.FC<{children:React.ReactNode}> =({children}) =>{
     const [authStatus,setAuthStatus]=React.useState<boolean >(false);
 
     useEffect(() => {
-        const token = sessionStorage.getItem('token');
+        const token = localStorage.getItem('token');
         if (token) {
             setAuthStatus(true); // Set authStatus to true if token exists
         } else {
             setAuthStatus(false); // Set authStatus to false if no token
         }
-    }, [sessionStorage.getItem('token')]);
+    }, [localStorage.getItem('token')]);
     
 
         

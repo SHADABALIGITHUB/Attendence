@@ -42,7 +42,7 @@ function App() {
               <Route path='/create-sheet' element={<CreateSheet/>} />
               <Route path="/create-sheet-table" element={<TableForAdding/>} />
               <Route path="/view-sheet" element={<ViewSheet/>}/>
-              <Route path='/admin-create-sheet' element={sessionStorage.getItem('email')==='shadab89@gmail.com'?<AdminCreateSheet/>:<CreateSheet/>}/>
+              <Route path='/admin-create-sheet' element={localStorage.getItem('email')=== import.meta.env.VITE_ADMIN_EMAIL?<AdminCreateSheet/>:<CreateSheet/>}/>
        
           </Route>
        
@@ -50,7 +50,7 @@ function App() {
        
       </Route>
    
-      <Route path='*' element={<h2> Notfound </h2>}></Route>
+      <Route path='*' element={<h2>404  Not Found </h2>}></Route>
      
       
 

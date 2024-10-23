@@ -45,7 +45,7 @@ app.get('/', (req, res) => {
 // user 
 app.use('/api/user',CreateUserRoute);
 app.use('/api/user',OtpVerificationRouter);
-app.use('/api/user',LoginUserRoute)
+app.use('/api/user',LoginUserRoute);
 
 // sheet 
 app.use('/api/sheet',Sheets);

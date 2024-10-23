@@ -9,11 +9,13 @@ import {currentPageStateContext} from './CurrentPageState';
 interface QuestionSheetContextType{
     DefaultSheetData:UserSheetType[],
     setDefaultSheetData:React.Dispatch<React.SetStateAction<UserSheetType[]>>
+    refreshSheets2: () => void
 }
 
 export const DefaultSheetDataContext= createContext<QuestionSheetContextType>({
     DefaultSheetData:[],
     setDefaultSheetData:()=>{},
+    refreshSheets2: () => {}
 });
 
 // Create a provider component
@@ -29,12 +31,12 @@ const DefaultSheetDataProvider:React.FC<{children:React.ReactNode}> = ({ childre
      
   
 
-       useEffect(()=>{
+   
 
         const CallApi =async()=>{
 
           try{
-            const response=await FetchInstance(`/api/sheet/default/shadab89@gmail.com`,{
+            const response=await FetchInstance(`/api/sheet/default/${import.meta.env.VITE_ADMIN_EMAIL}`,{
               method:"GET"
             })
 
@@ -58,6 +60,20 @@ const DefaultSheetDataProvider:React.FC<{children:React.ReactNode}> = ({ childre
           }
 
         }
+    
+
+       
+        
+        
+       
+
+     
+     const refreshSheets2 = () => {
+        CallApi();
+      };
+
+     useEffect(()=>{
+        
 
         CallApi();
 
@@ -65,10 +81,10 @@ const DefaultSheetDataProvider:React.FC<{children:React.ReactNode}> = ({ childre
         
        
 
-     },[authStatus,currentstate])
+     },[authStatus,currentstate]);
 
     return (
-        <DefaultSheetDataContext.Provider value={{ DefaultSheetData,setDefaultSheetData }}>
+        <DefaultSheetDataContext.Provider value={{ DefaultSheetData,setDefaultSheetData,refreshSheets2 }}>
             {children}
         </DefaultSheetDataContext.Provider>
     );

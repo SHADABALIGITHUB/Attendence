@@ -1,8 +1,8 @@
 const express=require('express');
 const router=express.Router();
-const UserVerification=require('../../controllers/Auth/UserVerification');
+const otpverify=require('../../controllers/Auth/OtpVerification');
 
-router.route('/verify').post(UserVerification);
+router.route('/verify').post(otpverify);
 
 
 module.exports=router;

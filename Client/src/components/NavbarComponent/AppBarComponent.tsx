@@ -33,7 +33,7 @@ const AppBarComponent = () => {
     };
 
     const handleLogout = () => {
-      sessionStorage.removeItem('token'); sessionStorage.removeItem('email'); setAuthStatus(false); navigate('/login');
+      localStorage.removeItem('token'); localStorage.removeItem('email'); setAuthStatus(false); navigate('/login');
         handleClose();
     };
 
@@ -84,7 +84,7 @@ const AppBarComponent = () => {
                         </Fab>
 
 
-                       {sessionStorage.getItem('email')==='shadab89@gmail.com' && <Fab variant="extended" sx={{backgroundColor:'transparent',boxShadow:'none',':hover':{color:'#0088cc'}}}  size="medium" onClick={() => { setCurrentState("Admin"); navigate('/admin-create-sheet'); }}>
+                       {localStorage.getItem('email')===import.meta.env.VITE_ADMIN_EMAIL && <Fab variant="extended" sx={{backgroundColor:'transparent',boxShadow:'none',':hover':{color:'#0088cc'}}}  size="medium" onClick={() => { setCurrentState("Admin"); navigate('/admin-create-sheet'); }}>
                            <AdminPanelSettingsIcon sx={{mr:1}}/>
                            <Typography variant="body1" noWrap>
                             Admin
@@ -111,7 +111,7 @@ const AppBarComponent = () => {
                             sx={{ position: 'absolute', top: '40px', right: '0' }} // Adjust position if needed
                         >
                             <MenuItem disabled>
-                                <Typography variant="body1">{sessionStorage.getItem('email')}</Typography>
+                                <Typography variant="body1">{localStorage.getItem('email')}</Typography>
                             </MenuItem>
                             <MenuItem onClick={handleLogout}>Logout</MenuItem>
                         </Menu>

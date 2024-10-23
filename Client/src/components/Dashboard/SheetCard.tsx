@@ -38,7 +38,7 @@ const SheetCard:React.FC<SheetCardProps> = ({SheetType,data}) => {
       
       <Button size="small" onClick={()=>{ navigate('/view-sheet',{ state: { Listquestion:data.Listquestion} })}  }> Open </Button>
 
-      {SheetType==='MySheet'?<Button size="small"  onClick={()=>{ navigate('/create-sheet-table',{state:{sheetid:data.sheetid}})}} > Add Questions  </Button> : sessionStorage.getItem('email')==='shadab89@gmail.com'?<Button size="small"  onClick={()=>{ navigate('/create-sheet-table',{state:{sheetid:data.sheetid,sheetType:SheetType}})}} > Add Questions  </Button>:<Button disabled={true} > Add Questions  </Button> }
+      {SheetType==='MySheet'?<Button size="small"  onClick={()=>{ navigate('/create-sheet-table',{state:{sheetid:data.sheetid}})}} > Add Questions  </Button> : localStorage.getItem('email')===import.meta.env.VITE_ADMIN_EMAIL?<Button size="small"  onClick={()=>{ navigate('/create-sheet-table',{state:{sheetid:data.sheetid,sheetType:SheetType}})}} > Add Questions  </Button>:<Button disabled={true} > Add Questions  </Button> }
     </CardActions>
   </Card>
   )

@@ -17,7 +17,7 @@ import Link from '@mui/material/Link';
 import FetchInstance from '../../fetchInstance/Fetch';
 import { useLocation } from 'react-router-dom';
 import { UserSheetsDataContext } from '../../context/UserSheets';
-
+import { DefaultSheetDataContext } from '../../context/DefaultSheets';
 
 
 
@@ -60,8 +60,11 @@ hasVideoSolution: boolean,
     const sheetType:string=location.state?.sheetType;
 
 
+     
   
-     const {refreshSheets}=React.useContext(UserSheetsDataContext)
+     const {refreshSheets}=React.useContext(UserSheetsDataContext);
+
+     const {refreshSheets2}=React.useContext(DefaultSheetDataContext);
 
 
 
@@ -74,24 +77,31 @@ hasVideoSolution: boolean,
         let response;
 
         if(sheetType==="Default"){
-        response = await FetchInstance('/api/sheet/user/add-question',{
+          
+          response = await FetchInstance('/api/sheet/add-question',{
             method:"POST",
             body:JSON.stringify({
               row:row,
               sheetid: sheetid
           })
-
+  
         })
+        
       }else{
 
-         response = await FetchInstance('/api/sheet/add-question',{
+         
+
+        response = await FetchInstance('/api/sheet/user/add-question',{
           method:"POST",
           body:JSON.stringify({
             row:row,
             sheetid: sheetid
         })
+       
 
       })
+
+        
 
 
 
@@ -113,7 +123,10 @@ hasVideoSolution: boolean,
         else if(response.message==="Updation done"){
            
             alert("added Question to Sheet");
+            if(sheetType==="UserSheet")
             refreshSheets();
+            else
+            refreshSheets2();
 
 
         }

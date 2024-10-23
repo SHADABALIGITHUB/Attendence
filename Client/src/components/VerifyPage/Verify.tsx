@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import { Box, styled } from '@mui/system';
 import { Button } from '@mui/material';
 import { useLocation,useNavigate } from 'react-router-dom';
+import FetchInstance from '../../fetchInstance/Fetch';
 
 export default function OTPInput() {
   const [otp, setOtp] = React.useState<String[]>(new Array(4).fill(''));
@@ -15,25 +16,23 @@ export default function OTPInput() {
     const onVerify=async ()=>{
 
         const data1={email:myemail,otp:otp.join('')};
-        
+       
        
         try {
            
-            const response= await fetch('http://localhost:5000/api/user/verify',{ 
+            const response= await FetchInstance('/api/user/verify',{ 
                 method:'POST',
-                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data1),
     
             })
            
+          
            
-            
-            const data = await response.json();
-            // console.log(data);
     
-            if(data.status){
-                navigate('/dashboard');
-            }
+            if(response.message==="OTP verified successfully"){
+              navigate('/dashboard');
+          }
+           
             
     
            
