@@ -33,7 +33,7 @@ const AppBarComponent = () => {
     };
 
     const handleLogout = () => {
-      localStorage.removeItem('token'); localStorage.removeItem('email'); setAuthStatus(false); navigate('/login');
+      localStorage.removeItem('token'); localStorage.removeItem('email'); setAuthStatus(false); navigate('/auth');
         handleClose();
     };
 

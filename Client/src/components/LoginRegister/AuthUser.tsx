@@ -11,56 +11,88 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthStatus } from "../../context/Auth";
 import CircularProgress from "@mui/material/CircularProgress";
-import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
+// import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
+import {Logintype} from '../../context/Logintype';
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
 
-const Login: React.FC = () => {
+const AuthUser: React.FC = () => {
   const { setAuthStatus } = useContext(AuthStatus);
   const navigate = useNavigate();
+  const {logintype,setLogintype}=useContext(Logintype);
+  const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
-  const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = useState(false);
+  const [usernameError, setUsernameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [helperTextEmail, setHelperTextEmail] = useState<string>("");
   const [helperTextPassword, setHelperTextPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
-  const handleClose = (
-    event: React.SyntheticEvent | Event,
-    reason?: SnackbarCloseReason
-  ) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    console.log(event);
-    setOpen(false);
-  };
+  // const handleClose = (
+  //   event: React.SyntheticEvent | Event,
+  //   reason?: SnackbarCloseReason
+  // ) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   console.log(event);
+  //   setOpen(false);
+  // };
 
   //
   const handleClickShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
 
-  const action = (
-    <React.Fragment>
-      <Button color="secondary" size="small" onClick={handleClose}>
-        close
-      </Button>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </React.Fragment>
-  );
+  // const action = (
+  //   <React.Fragment>
+  //     <Button color="secondary" size="small" onClick={handleClose}>
+  //       close
+  //     </Button>
+  //     <IconButton
+  //       size="small"
+  //       aria-label="close"
+  //       color="inherit"
+  //       onClick={handleClose}
+  //     >
+  //       <CloseIcon fontSize="small" />
+  //     </IconButton>
+  //   </React.Fragment>
+  // );
+
+  const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (username ==='') {
+      setUsernameError(true);
+      console.log("Username can only contain letters and numbers.");
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+
+    try {
+      const user = await FetchInstance("/api/user/create", {
+        method: "POST",
+        body: JSON.stringify({
+          username: username,
+          password: password,
+          email: email,
+        }),
+      });
+
+      if (user.status) {
+        setLoading(false);
+        navigate("/register-verify", { state: { email: email } });
+      }
+    } catch (err) {
+      console.error("There was a problem with the fetch operation:", err); // Error handling
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -98,22 +130,26 @@ const Login: React.FC = () => {
 
         return;
       }
-      if(!response.status && response.message ==='user not Verified'){
-         setEmailError(true);
+      if (!response.status && response.message === "user not Verified") {
+        setEmailError(true);
         setHelperTextEmail("Email not verified");
         setPasswordError(true);
-        
-
       }
 
       if (response.status) {
-        setOpen(true);
+        // setOpen(true);
         localStorage.setItem("token", response.token);
         localStorage.setItem("email", email);
         setAuthStatus(true);
         navigate("/dashboard");
       }
     } catch (err) {
+
+      if (err) {
+        setEmailError(true);
+        setHelperTextEmail("Try Again");
+        setPasswordError(true);
+      }
       console.log(err);
     } finally {
       setLoading(false);
@@ -121,19 +157,19 @@ const Login: React.FC = () => {
   };
   return (
     <Box
-      onSubmit={handleSubmit}
+      onSubmit={logintype === 'Register'? handleRegister : handleSubmit}
       component="form"
       sx={style}
       noValidate
       autoComplete="off"
     >
-      <Snackbar
+      {/* <Snackbar
         open={open}
         autoHideDuration={4000}
         onClose={handleClose}
         message="Login Successfull"
         action={action}
-      />
+      /> */}
 
       <IconButton
         component={RouterLink}
@@ -162,8 +198,25 @@ const Login: React.FC = () => {
             gutterBottom
           >
             {" "}
-            Login{" "}
+            {logintype == "Register" ? "Register" : "Login"}{" "}
           </Typography>
+
+          {logintype == "Register" && (
+            <TextField
+              error={usernameError}
+              onChange={(e) => {
+                setUsername(e.target.value);
+                setUsernameError(false);
+              }}
+              value={username}
+              name="username"
+              type="text"
+              label="Username"
+              variant="outlined"
+              fullWidth
+              required
+            />
+          )}
 
           <TextField
             error={emailError}
@@ -203,13 +256,13 @@ const Login: React.FC = () => {
                     <IconButton
                       aria-label={
                         showPassword
-                          ?"display the password"
-                          :"hide the password" 
+                          ? "display the password"
+                          : "hide the password"
                       }
                       onClick={handleClickShowPassword}
                       edge="end"
                     >
-                      {showPassword ?  <Visibility />:<VisibilityOff />}
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
                   </InputAdornment>
                 ),
@@ -222,21 +275,21 @@ const Login: React.FC = () => {
             variant="contained"
             sx={{ maxWidth: "300px", minWidth: "100px" }}
           >
-            Login
+            {" "}
+            {logintype == "Register" ? "Register" : "Login"}{" "}
           </Button>
 
           <MuiLink
-            sx={{ fontSize: { xs: "12px", md: "14px" } }}
-            component={RouterLink}
-            to="/register"
+            sx={{ fontSize: { xs: "12px", md: "14px" },cursor:'pointer' }}
             underline="hover"
+            onClick={()=>{setLogintype(prev=>prev==='Register'?'Login':'Register')}}
           >
-            Don't have an account? Register
-          </MuiLink>
+          {logintype == "Register"?"Already have an account? Log in": "Don't have an account? Register "}
+          </MuiLink>'
         </>
       )}
     </Box>
   );
 };
 
-export default Login;
+export default AuthUser;

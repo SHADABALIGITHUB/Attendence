@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react'
-import {Link as RouterLink} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import { AuthStatus } from '../../context/Auth';
 import { useContext } from 'react';
 import { Box, Button, Typography } from "@mui/material";
+import { Logintype } from '../../context/Logintype';
 
 
 
@@ -10,6 +11,11 @@ import { Box, Button, Typography } from "@mui/material";
 
 
 const LandingPage:React.FC = () => {
+
+  const navigate=useNavigate();
+  const {setLogintype}=useContext(Logintype);
+
+  
 
   const authContext = useContext(AuthStatus);
 
@@ -83,7 +89,7 @@ const LandingPage:React.FC = () => {
                  
             
        
-            <RouterLink to="/login" ><Button variant='outlined' sx={{
+            <Button onClick={()=>{setLogintype('Login'); navigate('/auth')}} variant='outlined' sx={{
                  
                  fontSize: {
                    xs: '0.7rem', 
@@ -94,8 +100,8 @@ const LandingPage:React.FC = () => {
                   Login Your Account
 
                    </Button>
-                   </RouterLink>
-            <RouterLink to="/register"><Button  variant='contained'  sx={{
+                   
+           <Button onClick={()=>{setLogintype('Register'); navigate('/auth')}} variant='contained'  sx={{
                  
                  fontSize: {
                    xs: '0.7rem', 
@@ -106,7 +112,7 @@ const LandingPage:React.FC = () => {
 
                        </Button> 
             
-            </RouterLink> 
+        
            
                        
                

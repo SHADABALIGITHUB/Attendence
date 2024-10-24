@@ -5,14 +5,14 @@ import { Box, styled } from '@mui/system';
 import { Button } from '@mui/material';
 import { useLocation,useNavigate } from 'react-router-dom';
 import FetchInstance from '../../fetchInstance/Fetch';
+import {Logintype} from '../../context/Logintype';
 
 export default function OTPInput() {
   const [otp, setOtp] = React.useState<String[]>(new Array(4).fill(''));
   const location=useLocation();
   const navigate=useNavigate();
   const myemail:String=location.state?.email;
-  
-//    submit logic 
+  const {setLogintype}=React.useContext(Logintype);
     const onVerify=async ()=>{
 
         const data1={email:myemail,otp:otp.join('')};
@@ -30,7 +30,9 @@ export default function OTPInput() {
            
     
             if(response.message==="OTP verified successfully"){
-              navigate('/dashboard');
+              setLogintype('Login');
+
+              navigate('/auth');
           }
            
             

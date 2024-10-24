@@ -10,11 +10,13 @@ import AuthStatusProvider from './context/Auth.tsx';
 import UserSheetsDataProvider from './context/UserSheets.tsx';
 import DefaultSheetDataProvider from './context/DefaultSheets.tsx';
 import CurrentPageState from './context/CurrentPageState.tsx';
+import LogintypeProvider from './context/Logintype';
 import { CssBaseline } from '@mui/material';
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <LogintypeProvider>
     <AuthStatusProvider>
     <CurrentPageState>
       <DefaultSheetDataProvider>
@@ -25,5 +27,6 @@ createRoot(document.getElementById('root')!).render(
     </DefaultSheetDataProvider>
      </CurrentPageState>
     </AuthStatusProvider>
+    </LogintypeProvider>
   </StrictMode>,
 )
