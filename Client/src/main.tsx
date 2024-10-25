@@ -11,11 +11,13 @@ import UserSheetsDataProvider from './context/UserSheets.tsx';
 import DefaultSheetDataProvider from './context/DefaultSheets.tsx';
 import CurrentPageState from './context/CurrentPageState.tsx';
 import LogintypeProvider from './context/Logintype';
+import SnackbarProvider from './context/SnackbarProvider.tsx';
 import { CssBaseline } from '@mui/material';
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
+    <SnackbarProvider>
     <LogintypeProvider>
     <AuthStatusProvider>
     <CurrentPageState>
@@ -28,5 +30,7 @@ createRoot(document.getElementById('root')!).render(
      </CurrentPageState>
     </AuthStatusProvider>
     </LogintypeProvider>
+    </SnackbarProvider>
+    
   </StrictMode>,
 )

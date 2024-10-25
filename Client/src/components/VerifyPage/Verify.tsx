@@ -7,7 +7,7 @@ import { useLocation,useNavigate } from 'react-router-dom';
 import FetchInstance from '../../fetchInstance/Fetch';
 import {Logintype} from '../../context/Logintype';
 import CircularProgress from "@mui/material/CircularProgress";
-
+import { SnackbarContext } from '../../context/SnackbarProvider';
 export default function OTPInput() {
   const [otp, setOtp] = React.useState<String[]>(new Array(4).fill(''));
   const location=useLocation();
@@ -15,6 +15,7 @@ export default function OTPInput() {
   const myemail:String=location.state?.email;
   const {setLogintype}=React.useContext(Logintype);
   const [loading,setloading]=React.useState<boolean>(false);
+  const {openSnackbar} =React.useContext(SnackbarContext);
     const onVerify=async ()=>{
 
         const data1={email:myemail,otp:otp.join('')};
@@ -42,6 +43,7 @@ export default function OTPInput() {
            
         }
         catch(err){
+            openSnackbar("Otp Not Matched");
             setloading(false);
             console.error('There was a problem with the fetch operation:', err); // Error handling
         }

@@ -11,16 +11,16 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthStatus } from "../../context/Auth";
 import CircularProgress from "@mui/material/CircularProgress";
-// import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar";
-import {Logintype} from '../../context/Logintype';
+import { Logintype } from "../../context/Logintype";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import InputAdornment from "@mui/material/InputAdornment";
+import { SnackbarContext} from "../../context/SnackbarProvider";
 
 const AuthUser: React.FC = () => {
   const { setAuthStatus } = useContext(AuthStatus);
   const navigate = useNavigate();
-  const {logintype,setLogintype}=useContext(Logintype);
+  const { logintype, setLogintype } = useContext(Logintype);
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -31,43 +31,16 @@ const AuthUser: React.FC = () => {
   const [helperTextEmail, setHelperTextEmail] = useState<string>("");
   const [helperTextPassword, setHelperTextPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const {openSnackbar} =useContext(SnackbarContext);
 
-  // const handleClose = (
-  //   event: React.SyntheticEvent | Event,
-  //   reason?: SnackbarCloseReason
-  // ) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-  //   console.log(event);
-  //   setOpen(false);
-  // };
-
-  //
   const handleClickShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
-
-  // const action = (
-  //   <React.Fragment>
-  //     <Button color="secondary" size="small" onClick={handleClose}>
-  //       close
-  //     </Button>
-  //     <IconButton
-  //       size="small"
-  //       aria-label="close"
-  //       color="inherit"
-  //       onClick={handleClose}
-  //     >
-  //       <CloseIcon fontSize="small" />
-  //     </IconButton>
-  //   </React.Fragment>
-  // );
-
   const handleRegister = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (username ==='') {
+    if (username === "") {
+      openSnackbar("Something wrong try again")
       setUsernameError(true);
       console.log("Username can only contain letters and numbers.");
       setLoading(false);
@@ -86,11 +59,14 @@ const AuthUser: React.FC = () => {
       });
 
       if (user.status) {
+        
         setLoading(false);
+        openSnackbar("Account Created")
         navigate("/register-verify", { state: { email: email } });
       }
     } catch (err) {
-       if (err) {
+      if (err) {
+        openSnackbar("Something wrong try again");
         setLoading(false);
         setUsernameError(true);
         setEmailError(true);
@@ -111,6 +87,7 @@ const AuthUser: React.FC = () => {
       });
 
       if (!response.status && response.message === "Password is required") {
+        openSnackbar("Something wrong try again")
         setPasswordError(true);
         setHelperTextPassword("Password Required");
 
@@ -118,6 +95,7 @@ const AuthUser: React.FC = () => {
       }
 
       if (!response.status && response.message === "Email is required") {
+        openSnackbar("Something wrong try again")
         setEmailError(true);
         setHelperTextEmail("Email Required");
 
@@ -125,6 +103,7 @@ const AuthUser: React.FC = () => {
       }
 
       if (!response.status && response.message === "Email is not Register") {
+        openSnackbar("Email Not Registered")
         setEmailError(true);
         setHelperTextEmail("Email Not Registered");
 
@@ -132,27 +111,29 @@ const AuthUser: React.FC = () => {
       }
 
       if (!response.status && response.message === "Password not matched") {
+        openSnackbar("Password Not Match")
         setPasswordError(true);
         setHelperTextPassword("Password Not matched");
 
         return;
       }
       if (!response.status && response.message === "user not Verified") {
+        openSnackbar("Not a Verified User")
         setEmailError(true);
         setHelperTextEmail("Email not verified");
         setPasswordError(true);
       }
 
       if (response.status) {
-        // setOpen(true);
+        openSnackbar("Login User");
         localStorage.setItem("token", response.token);
         localStorage.setItem("email", email);
         setAuthStatus(true);
         navigate("/dashboard");
       }
     } catch (err) {
-
       if (err) {
+        openSnackbar("Server Error ! Check Internet")
         setEmailError(true);
         setHelperTextEmail("Try Again");
         setPasswordError(true);
@@ -164,20 +145,12 @@ const AuthUser: React.FC = () => {
   };
   return (
     <Box
-      onSubmit={logintype === 'Register'? handleRegister : handleSubmit}
+      onSubmit={logintype === "Register" ? handleRegister : handleSubmit}
       component="form"
       sx={style}
       noValidate
       autoComplete="off"
     >
-      {/* <Snackbar
-        open={open}
-        autoHideDuration={4000}
-        onClose={handleClose}
-        message="Login Successfull"
-        action={action}
-      /> */}
-
       <IconButton
         component={RouterLink}
         to="/"
@@ -207,7 +180,6 @@ const AuthUser: React.FC = () => {
             {" "}
             {logintype == "Register" ? "Register" : "Login"}{" "}
           </Typography>
-
           {logintype == "Register" && (
             <TextField
               error={usernameError}
@@ -224,7 +196,6 @@ const AuthUser: React.FC = () => {
               required
             />
           )}
-
           <TextField
             error={emailError}
             helperText={helperTextEmail}
@@ -276,7 +247,6 @@ const AuthUser: React.FC = () => {
               },
             }}
           />
-
           <Button
             type="submit"
             variant="contained"
@@ -285,14 +255,20 @@ const AuthUser: React.FC = () => {
             {" "}
             {logintype == "Register" ? "Register" : "Login"}{" "}
           </Button>
-
           <MuiLink
-            sx={{ fontSize: { xs: "12px", md: "14px" },cursor:'pointer' }}
+            sx={{ fontSize: { xs: "12px", md: "14px" }, cursor: "pointer" }}
             underline="hover"
-            onClick={()=>{setLogintype(prev=>prev==='Register'?'Login':'Register')}}
+            onClick={() => {
+              setLogintype((prev) =>
+                prev === "Register" ? "Login" : "Register"
+              );
+            }}
           >
-          {logintype == "Register"?"Already have an account? Log in": "Don't have an account? Register "}
-          </MuiLink>'
+            {logintype == "Register"
+              ? "Already have an account? Log in"
+              : "Don't have an account? Register "}
+          </MuiLink>
+          '
         </>
       )}
     </Box>
