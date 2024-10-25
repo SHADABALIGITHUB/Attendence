@@ -9,15 +9,15 @@ const User = require('../../models/User.model');
         const user = await User.findOne({ email });
 
         if (!user) {
-            return res.status(400).json({ message: 'User not found' });
+            return res.status(200).json({ message: 'User not found' });
         }
 
         if (user.otp !== otp) {
-            return res.status(400).json({ message: 'Invalid OTP' });
+            return res.status(200).json({ message: 'Invalid OTP' });
         }
 
         if (user.otpExpires < Date.now()) {
-            return res.status(400).json({ message: 'OTP has expired' });
+            return res.status(200).json({ message: 'OTP has expired' });
         }
 
         // OTP verified, update user status

@@ -90,6 +90,13 @@ const AuthUser: React.FC = () => {
         navigate("/register-verify", { state: { email: email } });
       }
     } catch (err) {
+       if (err) {
+        setLoading(false);
+        setUsernameError(true);
+        setEmailError(true);
+        setHelperTextEmail("Try Again");
+        setPasswordError(true);
+      }
       console.error("There was a problem with the fetch operation:", err); // Error handling
     }
   };
