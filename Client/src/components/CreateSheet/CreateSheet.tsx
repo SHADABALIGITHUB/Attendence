@@ -6,27 +6,29 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import {style} from '../../styles/login';
 import FetchInstance from '../../fetchInstance/Fetch';
+import CircularProgress from '@mui/material/CircularProgress';
 import ImageInput from '../Imageuploader/ImageInput';
 import {UserSheetsDataContext} from '../../context/UserSheets';
+import { SnackbarContext } from '../../context/SnackbarProvider';
 
 const CreateSheet:React.FC = () => {
    const navigate=useNavigate();
-
-   
-  const {refreshSheets}=useContext(UserSheetsDataContext);
+   const {openSnackbar} =useContext(SnackbarContext);
+   const {refreshSheets}=useContext(UserSheetsDataContext);
    const [sheettitle,setSheetTittle]=useState<string>('');
    const [selectedImage, setSelectedImage] = useState<string|null>(null);
    const [imageName, setImageName] = useState('');
+   const [loading,setLoading]=useState(false);
    
    const useremail=localStorage.getItem('email');
   
      
    
 
-    const handle=async (e:React.FormEvent<HTMLFormElement>)=>{
+    const handle= async (e:React.FormEvent<HTMLFormElement>)=>{
 
          e.preventDefault();
- 
+         setLoading(true);
      
         
       const RandomImage = [
@@ -66,7 +68,9 @@ const CreateSheet:React.FC = () => {
 
            if(AddSheetTodatabase.status){
 
-              refreshSheets();  
+              refreshSheets();
+              setLoading(false);
+              openSnackbar("Sheet Created Successfully");
               navigate('/dashboard');
 
            }
@@ -80,11 +84,15 @@ const CreateSheet:React.FC = () => {
         }
         catch(err){
 
-            
+         setLoading(false);
            console.log("error",err);
+
           
 
         }
+     
+         setLoading(false);
+        
 
         
 
@@ -93,8 +101,17 @@ const CreateSheet:React.FC = () => {
 
       
     }
+
+if(loading){
+   return (
+      <CircularProgress size={30} />
+   )
+}
   
   return (
+
+
+     
 
       <Box
       onSubmit={(e)=>{handle(e)}}
@@ -122,6 +139,9 @@ const CreateSheet:React.FC = () => {
        
     
       </Box>
+
+
+     
   )
 }
 

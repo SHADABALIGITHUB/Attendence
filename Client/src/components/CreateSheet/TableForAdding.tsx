@@ -20,6 +20,7 @@ import { UserSheetsDataContext } from "../../context/UserSheets";
 import { DefaultSheetDataContext } from "../../context/DefaultSheets";
 import { SnackbarContext } from "../../context/SnackbarProvider";
 
+
 interface topicTagSchema {
   name: string;
   id: string;
@@ -100,8 +101,13 @@ const TableForAdding: React.FC = () => {
         openSnackbar("Issue in adding");
       } else if (response.message === "Updation done") {
         openSnackbar("Added Question to Sheet");
-        if (sheetType === "UserSheet") refreshSheets();
-        else refreshSheets2();
+        if(sheetType === "Default"){
+          refreshSheets2();
+        }
+        else{
+         refreshSheets();
+        }
+        
       }
     } catch (err) {
       openSnackbar("Server Error");
