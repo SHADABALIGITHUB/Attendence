@@ -6,8 +6,8 @@ const Layout:React.FC = () => {
     <Box
    
     sx={{width:{md:'90vw'}, display:'flex',flexDirection:{
-      xs:'column',
-      sm:'row'
+       xs:'column',
+       sm:'row'
 
     }, justifyContent:'center',alignItems:"center",padding: {
       xs: '10px 10px',   // Padding for extra small screens

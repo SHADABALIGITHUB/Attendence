@@ -1,0 +1,16 @@
+.table-container {
+     padding:100px 0px;
+     
+    
+}
+
+@media (max-width:1200px){
+
+    .table-inner{
+     
+        width: 100vw;
+    }
+    
+
+}
+
