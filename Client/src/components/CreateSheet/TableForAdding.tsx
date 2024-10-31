@@ -208,7 +208,6 @@ const TableForAdding = () => {
     onPaginationChange: setPage,
     rowCount: 3308, 
 
-    
   });
 
   return <div className='table-container'>

@@ -46,6 +46,8 @@ const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) =
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
+    localStorage.removeItem("currentstreak");
+    localStorage.removeItem("Longeststreak");
     setAuthStatus(false);
     navigate("/auth");
     handleClose();
