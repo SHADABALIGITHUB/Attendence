@@ -38,7 +38,7 @@ const GetAllQuestion = async (req, res) => {
       return res.status(200).json({
         status: true,
         totalDocuments,
-        totalPages: Math.ceil(totalDocuments / options.limit),
+        totalPages: Math.ceil(Sheets.length/ options.limit),
         currentPage: options.page,
         data: Sheets,
       });

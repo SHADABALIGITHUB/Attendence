@@ -34,7 +34,7 @@ const LoginUser = async (req, res) => {
     
     if (user) {
       
-      return res.status(200).json({ message: 'User Login successfully', status: true ,token:token});
+      return res.status(200).json({ message: 'User Login successfully', status: true ,token:token,user:user});
     }
   } catch (err) {
     // Handle errors properly

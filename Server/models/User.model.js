@@ -27,7 +27,15 @@ const UserSchema = new mongoose.Schema({
     },
     otpExpires: {
         type: Date,
+    },
+    currentStreak:{
+        type:[mongoose.Schema.Types.Mixed],
+        default: [0, new Date()] 
+    },
+    longestStreak:{
+        type: Number,
     }
+   
 
 });
 const User=mongoose.model('user',UserSchema);
