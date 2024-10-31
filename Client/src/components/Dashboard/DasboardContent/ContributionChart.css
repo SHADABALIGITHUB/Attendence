@@ -1,0 +1,37 @@
+.contribution-chart {
+    display: grid;
+    grid-template-columns: repeat(8,1fr); /* 7 columns for each day of the week */
+    gap: 2px; /* Space between squares */
+  }
+  
+  .square {
+    width: 20px; /* Adjust size as needed */
+    height: 20px;
+    background-color: #e0e0e0; /* Default background color */
+    transition: background-color 0.3s;
+  }
+  
+  .intensity-0 {
+    background-color: #e0e0e0; /* No contributions */
+  }
+  
+  .intensity-1 {
+    background-color: #c6e48b; /* Light green */
+  }
+  
+  .intensity-2 {
+    background-color: #7bc96f; /* Medium green */
+  }
+  
+  .intensity-3 {
+    background-color: #27ae60; /* Darker green */
+  }
+  
+  .intensity-4 {
+    background-color: #1e6f34; /* Darkest green */
+  }
+  
+  .square:hover {
+    opacity: 0.8; /* Slight hover effect */
+  }
+  

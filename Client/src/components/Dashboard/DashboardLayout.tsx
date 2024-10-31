@@ -23,49 +23,7 @@ const DashboardLayout = () => {
    
   return (
        <>
-       {/* <Drawer
-         
-         variant="persistent"
-         anchor="left"
-         open={open}
-         
-         sx={{flexShrink: 0,position :"fixed" }}
-         style={{width:'300px'}}
-       >
-         
-         <div style={{marginTop:'10px'}}>
-           
-           <IconButton onClick={handleDrawerClose}>
-             <ChevronLeftIcon />
-           </IconButton>
-         </div>
-         <Divider />
-         <List>
-           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-             <ListItem key={text} disablePadding>
-               <ListItemButton >
-                 <ListItemIcon>
-                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                 </ListItemIcon>
-                 <ListItemText primary={text} />
-               </ListItemButton>
-             </ListItem>
-           ))}
-         </List>
-         <Divider />
-         <List>
-           {['All mail', 'Trash', 'Logout'].map((text, index) => (
-             <ListItem key={text} disablePadding>
-               <ListItemButton onClick={()=>{ }}>
-                 <ListItemIcon>
-                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                 </ListItemIcon>
-                 <ListItemText primary={text} />
-               </ListItemButton>
-             </ListItem>
-           ))}
-         </List>
-       </Drawer> */}
+       
        <AppBarComponent/>
        <Outlet />
        </>

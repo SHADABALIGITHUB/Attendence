@@ -1,4 +1,4 @@
-import React, { useMemo} from 'react';
+import React, { useMemo, useState} from 'react';
 import { MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef} from 'material-react-table';
 import FetchInstance from "../../fetchInstance/Fetch";
 import { useLocation } from "react-router-dom";
@@ -6,6 +6,7 @@ import { UserSheetsDataContext } from "../../context/UserSheets";
 import { DefaultSheetDataContext } from "../../context/DefaultSheets";
 import { SnackbarContext } from "../../context/SnackbarProvider";
 import Button from '@mui/material/Button';
+import { CircularProgress } from '@mui/material';
 import './Table.css';
 
 interface topicTagSchema {
@@ -33,8 +34,13 @@ interface Question_Sheet {
 
 const TableForAdding = () => {
   const location = useLocation();
-  const [page, setPage] = React.useState("1");
-  const limit = 20;
+  const [globalFilter, setGlobalFilter] = React.useState('');
+  const [loading,setLoading]=useState<boolean>(false);
+  const [page, setPage] = React.useState({
+    pageIndex:0,
+    pageSize:10,
+  });
+  // const [search,setSearch]=React.useState<String|number>("");
   const [rows, setRows] = React.useState<Question_Sheet[] | null>(null);
   const sheetid: number = location.state?.sheetid;
   const sheetType: string = location.state?.sheetType;
@@ -85,25 +91,44 @@ const TableForAdding = () => {
     }
   };
 
-  React.useEffect(() => {
-    const GetQuestionData = async () => {
-      try {
-        const QuestionData = await FetchInstance(
-          `/api/question/list?page=${page}&limit=${limit}`,
-          { method: "GET" }
-        );
+  const GetQuestionData = async () => {
+       setLoading(true);
+    try {
+      const QuestionData = await FetchInstance(
+        `/api/question/list?page=${page.pageIndex}&limit=${page.pageSize}&search=${globalFilter}`,
+        { method: "GET" }
+      );
 
-        if (QuestionData.status) {
-          setRows(QuestionData.data);
-        }
-      } catch (err) {
-        openSnackbar("Server Side Error");
-        console.log(err);
+      if (QuestionData.status) {
+        setRows(QuestionData.data);
       }
-    };
+    } catch (err) {
+      openSnackbar("Server Side Error");
+      setLoading(false);
+      console.log(err);
+    }
+    setLoading(false);
+  };
 
+
+  React.useEffect(() => {
+
+   
     GetQuestionData();
-  }, [page]);
+    
+
+  }, [page.pageIndex,page.pageSize,globalFilter]);
+
+
+  
+
+  // const onSearch=(e:React.ChangeEvent<HTMLInputElement> )=>{
+      
+  //     console.log(e.target.value);
+  //     setSearch(e.target.value);
+  //     console.log(search);
+
+  // }
 
   const columns = useMemo<MRT_ColumnDef<Question_Sheet>[]>(
     () => [
@@ -167,14 +192,31 @@ const TableForAdding = () => {
   const table = useMaterialReactTable({
     columns,
     data: rows || [], 
-    enablePagination:false,
-   
-    });
+    state:{
+       isLoading:loading,
+       globalFilter:globalFilter,
+       pagination:page,
+    },
+    muiCircularProgressProps: {
+      Component: <CircularProgress/> ,
+    },
+    manualFiltering: true,
+    enableColumnFilters: false,
+    enableHiding:false,
+    onGlobalFilterChange: setGlobalFilter, 
+    manualPagination:true,
+    onPaginationChange: setPage,
+    rowCount: 3308, 
+
+    
+  });
 
   return <div className='table-container'>
      <div className='table-inner'>
+   {/* <input placeholder='search leet code question id' style={{height:'50px'}}  type='text'  onChange={(e)=>{onSearch(e)}} /> */}
+   {/* <button onClick={GetQuestionData}> Search </button> */}
   <MaterialReactTable table={table} />
- 
+{/*  
   <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
     <Button
       onClick={() => setPage((prev) =>
@@ -187,7 +229,7 @@ const TableForAdding = () => {
     <Button onClick={() => setPage((prev) => String(parseInt(prev) + 1))}>
       Next
     </Button>
-  </div>
+  </div> */}
   </div>
 </div>
 };

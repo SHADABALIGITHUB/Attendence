@@ -3,7 +3,7 @@ import SheetCardViewInDashboard from './Sheets/SheetCardViewInDashboard';
 import { UserSheetsDataContext } from '../../context/UserSheets';
 import { DefaultSheetDataContext } from '../../context/DefaultSheets';
 import { currentPageStateContext } from '../../context/CurrentPageState';
-
+import DashboardContent from './DasboardContent/DashboardContent';
 
 interface TopicTag {
   name: string;
@@ -51,7 +51,7 @@ const Dashboard: React.FC = () => {
    
   return (
       <>      
-       {currentstate==="DefaultSheet"? <SheetCardViewInDashboard SheetType="Default" UserSheetsData={DefaultSheetData}/>:currentstate==="UserSheet"?<SheetCardViewInDashboard SheetType="UserSheet" UserSheetsData={UserSheetsData}/>:<h2> Welcome to Dashboard</h2>}
+       {currentstate==="DefaultSheet"? <SheetCardViewInDashboard SheetType="Default" UserSheetsData={DefaultSheetData}/>:currentstate==="UserSheet"?<SheetCardViewInDashboard SheetType="UserSheet" UserSheetsData={UserSheetsData}/>:<DashboardContent/>}
       </>
 
 
