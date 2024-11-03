@@ -24,7 +24,7 @@ interface RoutesPropsTypes{
 const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) => {
     const navigate = useNavigate();
   
-    const { setAuthStatus } = useContext(AuthStatus);
+    const { setAuthStatus ,userData} = useContext(AuthStatus);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const theme = useTheme<Theme>();
     const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
@@ -43,7 +43,7 @@ const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) =
   };
   const handleLogout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("email");
+    
     setAuthStatus(false);
     navigate("/auth");
     handleClose();
@@ -149,7 +149,7 @@ const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) =
       </Typography>
     </Fab>
 
-    {localStorage.getItem("email") ===
+    {userData?.email ===
       import.meta.env.VITE_ADMIN_EMAIL && (
       <Fab
         variant="extended"
@@ -228,7 +228,10 @@ const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) =
       >
         <MenuItem disabled>
           <Typography variant="body1">
-            {localStorage.getItem("email")}
+             {userData?.username}
+          </Typography>
+          <Typography variant="body1">
+             {userData?.email}
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>

@@ -2,12 +2,12 @@ import React, { useMemo, useState} from 'react';
 import { MaterialReactTable, useMaterialReactTable, type MRT_ColumnDef} from 'material-react-table';
 import FetchInstance from "../../fetchInstance/Fetch";
 import { useLocation } from "react-router-dom";
-import { UserSheetsDataContext } from "../../context/UserSheets";
 import { DefaultSheetDataContext } from "../../context/DefaultSheets";
 import { SnackbarContext } from "../../context/SnackbarProvider";
 import Button from '@mui/material/Button';
 import { CircularProgress } from '@mui/material';
 import './Table.css';
+
 
 interface topicTagSchema {
   name: string;
@@ -44,8 +44,7 @@ const TableForAdding = () => {
   const [rows, setRows] = React.useState<Question_Sheet[] | null>(null);
   const sheetid: number = location.state?.sheetid;
   const sheetType: string = location.state?.sheetType;
-  const { refreshSheets } = React.useContext(UserSheetsDataContext);
-  const { refreshSheets2 } = React.useContext(DefaultSheetDataContext);
+ const { refreshSheets2 } = React.useContext(DefaultSheetDataContext);
   const { openSnackbar } = React.useContext(SnackbarContext);
 
   const AddQuestion = async (
@@ -80,7 +79,7 @@ const TableForAdding = () => {
           break;
         case "Updation done":
           openSnackbar("Added Question to Sheet");
-          sheetType === "Default" ? refreshSheets2() : refreshSheets();
+          sheetType === "Default" && refreshSheets2();
           break;
         default:
           openSnackbar("Unknown response");

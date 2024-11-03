@@ -7,25 +7,25 @@ import "@fontsource/roboto/400.css"; // Regular font
 import "@fontsource/roboto/500.css"; // Medium font
 import "@fontsource/roboto/700.css";
 import AuthStatusProvider from "./context/Auth.tsx";
-import UserSheetsDataProvider from "./context/UserSheets.tsx";
 import DefaultSheetDataProvider from "./context/DefaultSheets.tsx";
 import LogintypeProvider from "./context/Logintype";
 import SnackbarProvider from "./context/SnackbarProvider.tsx";
 import { CssBaseline } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <SnackbarProvider>
-      <LogintypeProvider>
-        <AuthStatusProvider>
-          <DefaultSheetDataProvider>
-            <UserSheetsDataProvider>
+    <BrowserRouter>
+      <SnackbarProvider>
+        <LogintypeProvider>
+          <AuthStatusProvider>
+            <DefaultSheetDataProvider>
               <CssBaseline />
               <App />
-            </UserSheetsDataProvider>
-          </DefaultSheetDataProvider>
-        </AuthStatusProvider>
-      </LogintypeProvider>
-    </SnackbarProvider>
+            </DefaultSheetDataProvider>
+          </AuthStatusProvider>
+        </LogintypeProvider>
+      </SnackbarProvider>
+    </BrowserRouter>
   </StrictMode>
 );

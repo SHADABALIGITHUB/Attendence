@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -7,12 +7,14 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { UserSheetType } from "./Dashboard";
 import { useNavigate } from "react-router-dom";
+import { AuthStatus } from "../../context/Auth";
 interface SheetCardProps {
   data: UserSheetType;
   SheetType: string;
 }
 const SheetCard: React.FC<SheetCardProps> = ({ SheetType, data }) => {
   const navigate = useNavigate();
+  const {userData} =useContext(AuthStatus);
   return (
     <Card sx={{ maxWidth: 345, minWidth: 280 }}>
       <CardMedia
@@ -56,7 +58,7 @@ const SheetCard: React.FC<SheetCardProps> = ({ SheetType, data }) => {
             {" "}
             Add Questions{" "}
           </Button>
-        ) : localStorage.getItem("email") ===
+        ) : userData?.email ===
           import.meta.env.VITE_ADMIN_EMAIL ? (
           <Button
             size="small"

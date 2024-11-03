@@ -14,14 +14,14 @@ const DashboardContent:React.FC = () => {
 
         const today = new Date();
         const lastDate = new Date(lastActivityDate?lastActivityDate:'');
-        console.log(today);
-        console.log("My",lastDate);
+        // console.log(today);
+        // console.log("My",lastDate);
         const differenceInTime = today.getTime() - lastDate.getTime();
         const differenceInDays = differenceInTime / (1000 * 3600 * 24);
 
 
         if (differenceInDays === 1) {
-           console.log("working")
+          //  console.log("working")
           // If the last activity was exactly one day ago, increment the streak
           setStreak(streak?streak+1:"2");
         } else if (differenceInDays > 1) {

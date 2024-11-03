@@ -129,7 +129,6 @@ const AuthUser: React.FC = () => {
       if (response.status) {
         openSnackbar("Login User");
         localStorage.setItem("token", response.token);
-        localStorage.setItem("email", email);
         setUserData(response.user);
         setAuthStatus(true);
         navigate("/dashboard");

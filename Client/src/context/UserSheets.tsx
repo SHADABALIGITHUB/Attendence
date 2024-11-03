@@ -1,31 +1,31 @@
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import FetchInstance from '../fetchInstance/Fetch';
+// import React, { createContext, useState, useEffect, useContext } from 'react';
+// import FetchInstance from '../fetchInstance/Fetch';
 
 
-import  {UserSheetType} from '../components/Dashboard/Dashboard'
-import { AuthStatus } from './Auth';
+// import  {UserSheetType} from '../components/Dashboard/Dashboard'
+// import { AuthStatus } from './Auth';
 
 
-interface QuestionSheetContextType{
-    UserSheetsData:UserSheetType[],
-    setUserSheetsData:React.Dispatch<React.SetStateAction<UserSheetType[]>>
-    refreshSheets: () => void 
-}
+// interface QuestionSheetContextType{
+//     UserSheetsData:UserSheetType[],
+//     setUserSheetsData:React.Dispatch<React.SetStateAction<UserSheetType[]>>
+//     refreshSheets: () => void 
+// }
 
-export const UserSheetsDataContext= createContext<QuestionSheetContextType>({
-    UserSheetsData:[],
-    setUserSheetsData:()=>{},
-    refreshSheets: () => {}
-});
+// export const UserSheetsDataContext= createContext<QuestionSheetContextType>({
+//     UserSheetsData:[],
+//     setUserSheetsData:()=>{},
+//     refreshSheets: () => {}
+// });
 
-// Create a provider component
-const UserSheetsDataProvider:React.FC<{children:React.ReactNode}> = ({ children }) => {
-    const [UserSheetsData, setUserSheetsData] = useState<UserSheetType[]>([]);
+// // Create a provider component
+// const UserSheetsDataProvider:React.FC<{children:React.ReactNode}> = ({ children }) => {
+//     const [UserSheetsData, setUserSheetsData] = useState<UserSheetType[]>([]);
    
-     const {authStatus}=useContext(AuthStatus);
+//      const {authStatus}=useContext(AuthStatus);
  
           
-       const email=localStorage.getItem('email');
+//        const email=localStorage.getItem('email');
        
      
      
@@ -35,60 +35,60 @@ const UserSheetsDataProvider:React.FC<{children:React.ReactNode}> = ({ children 
     
         
 
-        const CallApi =async()=>{
+//         const CallApi =async()=>{
 
-            if(!email){
-                return ;
-             }
+//             if(!email){
+//                 return ;
+//              }
 
-          try{
-            const response=await FetchInstance(`/api/sheet/user/${email}`,{
-              method:"GET"
-            })
+//           try{
+//             const response=await FetchInstance(`/api/sheet/user/${email}`,{
+//               method:"GET"
+//             })
 
-            if(response.status){
+//             if(response.status){
 
-                setUserSheetsData(response.data);
+//                 setUserSheetsData(response.data);
                
                 
 
-            }
-            else{
+//             }
+//             else{
 
-               console.log("somthing Wrong ");
+//                console.log("somthing Wrong ");
 
-            }
+//             }
 
-          }
-          catch(err){
+//           }
+//           catch(err){
 
-              console.log("Err 501 server issue",err);
+//               console.log("Err 501 server issue",err);
 
-          }
+//           }
 
-        }
+//         }
 
-        const refreshSheets = () => {
-            CallApi();
-          };
+//         const refreshSheets = () => {
+//             CallApi();
+//           };
 
-      useEffect(()=>{
+//       useEffect(()=>{
         
 
-        CallApi();
+//         CallApi();
 
         
         
        
 
-     },[authStatus]);
+//      },[authStatus]);
 
-    return (
-        <UserSheetsDataContext.Provider value={{ UserSheetsData,setUserSheetsData,refreshSheets }}>
-            {children}
-        </UserSheetsDataContext.Provider>
-    );
-};
+//     return (
+//         <UserSheetsDataContext.Provider value={{ UserSheetsData,setUserSheetsData,refreshSheets }}>
+//             {children}
+//         </UserSheetsDataContext.Provider>
+//     );
+// };
 
 
-export default UserSheetsDataProvider;
+// export default UserSheetsDataProvider;

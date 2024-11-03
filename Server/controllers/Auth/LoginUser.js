@@ -1,7 +1,7 @@
 const UserModel = require('../../models/User.model');
 const bcrypt = require('bcrypt');
 const jwt=require('jsonwebtoken');
-
+const {TOKEN_SECRET}=require('../../config/env');
 const LoginUser = async (req, res) => {
   try {
     // Ensure that 'password' comes from req.body
@@ -27,7 +27,7 @@ const LoginUser = async (req, res) => {
     if (!passwordMatch) {
         return res.status(200).json({ message: 'Password not matched', status: false });
         }
-        const token = jwt.sign({ userId: user._id }, 'your-secret-key', {
+        const token = jwt.sign({ userId: user._id }, TOKEN_SECRET , {
             expiresIn: '1h',
         });   
         

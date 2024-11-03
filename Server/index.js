@@ -65,7 +65,7 @@ const PrepareCompleteSheetUsingIdRouter=require('./routes/Sheets/PrepareComplete
 const AddQuestionsIntoSheetsRouter=require('./routes/Sheets/AddQuestionToSheet.routes');
 const GetAllQuestionsRoute=require('./routes/Sheets/GetAllQuestions.routes')
 const ImageUploadedToCloudRouter=require('./routes/ImageUploadedToCloud.routes');
-
+const TokenToUserData=require('./routes/Auth/TokenToUserData.routes');
 
 // Define a sample route
 app.get('/', (req, res) => {
@@ -78,6 +78,7 @@ app.get('/', (req, res) => {
 app.use('/api/user',CreateUserRoute);
 app.use('/api/user',OtpVerificationRouter);
 app.use('/api/user',LoginUserRoute);
+app.use('/api/user',TokenToUserData);
 
 // sheet 
 app.use('/api/sheet',Sheets);
