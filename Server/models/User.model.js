@@ -34,7 +34,15 @@ const UserSchema = new mongoose.Schema({
     },
     longestStreak:{
         type: Number,
-    }
+    },
+    defaultSheetProgress: {
+        type: Map,
+        of: {
+          progress: { type: Number, default: 0 }, // Progress in percentage (0-100)
+          lastUpdated: { type: Date, default: Date.now } // Track the last update date
+        },
+        default: {}
+    },
    
 
 });

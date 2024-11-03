@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import Box from '@mui/material/Box';
 import YearChartUser from './YearChartUser'
 import Streak from './Streak'
+import DefaultSheetCompletedStats from './DefaultSheetCompletedStats';
+import UserData from '../UserProfile/UserData';
 const DashboardContent:React.FC = () => {
     const [streak,setStreak]=useState(localStorage.getItem("currentstreak"));
    
@@ -47,14 +50,19 @@ const DashboardContent:React.FC = () => {
       })
 
   return (
-    <div style={{marginTop:'50px'}}>
+     <Box sx={{backgroundColor:'',width:'100%',height:'100vh',marginTop:'100px',display:'flex',position:'relative',flexDirection:'column'}}>
+       
+          <DefaultSheetCompletedStats/>
 
+          <UserData/>
          
           <Streak currentStreak={streak?streak:"1"} highestStreak={localStorage.getItem('Longeststreak')} />
-          <h2>  Start contibuting Daily in Sheets </h2>
-          <YearChartUser/>
+           <Box sx={{position:'absolute' ,bottom:'50px',width:'100%',display:'flex',justifyContent:'center',flexDirection:'column',alignItems:'center',overflowX:{xs:"scroll",md:"hidden"}}}>
+            <h2>  Start contibuting Daily in Sheets </h2>
+            <YearChartUser/>
+          </Box>
       
-    </div>
+    </Box>
   )
 }
 

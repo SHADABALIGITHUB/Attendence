@@ -18,7 +18,9 @@ import InputAdornment from "@mui/material/InputAdornment";
 import { SnackbarContext} from "../../context/SnackbarProvider";
 
 const AuthUser: React.FC = () => {
-  const { setAuthStatus } = useContext(AuthStatus);
+  const { setAuthStatus,setUserData } = useContext(AuthStatus);
+  
+
   const navigate = useNavigate();
   const { logintype, setLogintype } = useContext(Logintype);
   const [username, setUsername] = useState<string>("");
@@ -128,10 +130,7 @@ const AuthUser: React.FC = () => {
         openSnackbar("Login User");
         localStorage.setItem("token", response.token);
         localStorage.setItem("email", email);
-        localStorage.setItem("currentstreak",response.user.currentStreak[0]);
-        localStorage.setItem("currentstreakDate",response.user.currentStreak[1]);
-        localStorage.setItem("Longeststreak",response.user.longestStreak);
-
+        setUserData(response.user);
         setAuthStatus(true);
         navigate("/dashboard");
       }

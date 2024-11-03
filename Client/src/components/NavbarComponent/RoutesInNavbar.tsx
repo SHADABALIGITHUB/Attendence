@@ -10,7 +10,6 @@ import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 import SensorOccupiedIcon from "@mui/icons-material/SensorOccupied";
 import AdminPanelSettingsIcon from "@mui/icons-material/AdminPanelSettings";
 import { Menu, MenuItem, useMediaQuery, useTheme } from "@mui/material";
-import { currentPageStateContext } from "../../context/CurrentPageState";
 import { Theme } from "@mui/material/styles";
 import { useContext ,useState} from 'react';
 import { useNavigate } from "react-router-dom";
@@ -26,7 +25,6 @@ const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) =
     const navigate = useNavigate();
   
     const { setAuthStatus } = useContext(AuthStatus);
-    const { setCurrentState } = useContext(currentPageStateContext);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const theme = useTheme<Theme>();
     const isLargeScreen = useMediaQuery(theme.breakpoints.up("md"));
@@ -46,8 +44,6 @@ const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) =
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
-    localStorage.removeItem("currentstreak");
-    localStorage.removeItem("Longeststreak");
     setAuthStatus(false);
     navigate("/auth");
     handleClose();
@@ -84,7 +80,7 @@ const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) =
       }}
       size="medium"
       onClick={() => {
-        setCurrentState("Dashboard");
+        
         navigate("/dashboard");
         openCloseDropDown('none');
       }}
@@ -103,7 +99,7 @@ const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) =
       }}
       size="medium"
       onClick={() => {
-        setCurrentState("CreateSheet");
+        
         navigate("/create-sheet");
         openCloseDropDown('none');
         
@@ -123,8 +119,8 @@ const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) =
       }}
       size="medium"
       onClick={() => {
-        setCurrentState("DefaultSheet");
-        navigate("/dashboard");
+        
+        navigate("/default-sheets");
         openCloseDropDown('none');
       }}
     >
@@ -142,8 +138,8 @@ const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) =
       }}
       size="medium"
       onClick={() => {
-        setCurrentState("UserSheet");
-        navigate("/dashboard");
+        
+        navigate("/user-sheets");
         openCloseDropDown('none');
       }}
     >
@@ -164,7 +160,7 @@ const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) =
         }}
         size="medium"
         onClick={() => {
-          setCurrentState("Admin");
+          
           navigate("/admin-create-sheet");
           openCloseDropDown('none');
         }}

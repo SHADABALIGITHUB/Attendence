@@ -1,8 +1,4 @@
-import  React,{useContext} from 'react';
-import SheetCardViewInDashboard from './Sheets/SheetCardViewInDashboard';
-import { UserSheetsDataContext } from '../../context/UserSheets';
-import { DefaultSheetDataContext } from '../../context/DefaultSheets';
-import { currentPageStateContext } from '../../context/CurrentPageState';
+import  React from 'react';
 import DashboardContent from './DasboardContent/DashboardContent';
 
 interface TopicTag {
@@ -43,15 +39,11 @@ sheetid: number
 
 const Dashboard: React.FC = () => {
  
-  const {UserSheetsData}=useContext(UserSheetsDataContext);
-  const {DefaultSheetData}=useContext(DefaultSheetDataContext);
-   const {currentstate}=useContext(currentPageStateContext);
 
-  
    
   return (
-      <>      
-       {currentstate==="DefaultSheet"? <SheetCardViewInDashboard SheetType="Default" UserSheetsData={DefaultSheetData}/>:currentstate==="UserSheet"?<SheetCardViewInDashboard SheetType="UserSheet" UserSheetsData={UserSheetsData}/>:<DashboardContent/>}
+      <>     
+       <DashboardContent/>
       </>
 
 

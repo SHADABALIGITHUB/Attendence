@@ -4,7 +4,7 @@ import FetchInstance from '../fetchInstance/Fetch';
 
 import  {UserSheetType} from '../components/Dashboard/Dashboard'
 import { AuthStatus } from './Auth';
-import {currentPageStateContext} from './CurrentPageState';
+
 
 interface QuestionSheetContextType{
     DefaultSheetData:UserSheetType[],
@@ -23,7 +23,7 @@ const DefaultSheetDataProvider:React.FC<{children:React.ReactNode}> = ({ childre
     const [DefaultSheetData, setDefaultSheetData] = useState<UserSheetType[]>([]);
    
     const {authStatus}=useContext(AuthStatus);
-    const {currentstate}=useContext(currentPageStateContext);
+    
           
        
        
@@ -80,7 +80,7 @@ const DefaultSheetDataProvider:React.FC<{children:React.ReactNode}> = ({ childre
         
        
 
-     },[authStatus,currentstate]);
+     },[authStatus]);
 
     return (
         <DefaultSheetDataContext.Provider value={{ DefaultSheetData,setDefaultSheetData,refreshSheets2 }}>

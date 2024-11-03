@@ -17,6 +17,38 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const mongooseConnect = require('./config/database');
 mongooseConnect();
 
+// const User =require('./models/User.model');
+// const {Sheets}=require('./models/UserSheets/DefaultSheets');
+
+// async function addDefaultSheetProgress() {
+//     try {
+//       const DefaultSheets= await Sheets.find({},'sheetid');
+//     //    console.log(DefaultSheets);
+
+//       const defaultProgress = {};
+//       DefaultSheets.forEach(sheet => {
+//         defaultProgress[sheet.sheetid] = { progress: 0, lastUpdated: new Date() };
+//       });
+
+//     //   const result = await User.find();
+
+//     //   console.log(result[0].defaultSheetProgress);
+    
+       
+//       const result = await User.updateMany(
+       
+//         { $set: { defaultSheetProgress: defaultProgress } }        // Set the field to an empty object
+//       );
+//       console.log(result[0].defaultSheetProgress);
+  
+//       console.log(`Updated users to add defaultSheetProgress.`);
+//     } catch (error) {
+//       console.error('Error updating users:', error);
+//     } 
+//   }
+
+//   addDefaultSheetProgress();
+
 
 
 
