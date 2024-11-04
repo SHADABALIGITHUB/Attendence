@@ -6,12 +6,12 @@ import { deepOrange, green } from '@mui/material/colors';
 import { Typography } from '@mui/material';
 
 interface streak{
-   currentStreak: string,
-   highestStreak: string|null,
+   currentStreak: number | undefined
+   highestStreak: number | undefined,
 }
 const Streak:React.FC<streak> = ({currentStreak,highestStreak}) => {
   return (
-    <Box  sx={{margin:'30px',borderRadius:'20px' ,display:'flex',flexDirection:"column",backgroundColor:'#edfbfe',gap:"10px",width:'300px',height:'140px',justifyContent:'center',alignItems:'center'}}>
+    <Box  sx={{margin:'30px',borderRadius:'20px' ,display:'flex',flexDirection:"column",backgroundColor:'#edfbfe',gap:"10px",minWidth:'300px',minHeight:'300px',justifyContent:'center',alignItems:'center'}}>
 
        <Typography variant='body2' > Don't Break your  <span style={{color:'blueviolet'}}> Streak </span> just login daily </Typography>
 

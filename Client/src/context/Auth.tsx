@@ -9,6 +9,9 @@ interface AuthContextType {
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }
+export interface ContributionType {
+  [date: string]: number; // Each date is a key with a numeric value
+}
 interface UserData {
   _id: string;
   email: string;
@@ -27,7 +30,8 @@ interface UserData {
     };
   };
   userType: "admin" | "user";
-  contributions: Date[];
+  contributions: ContributionType[];
+  dateOfAccountCreation:string
 }
 
 export const AuthStatus = React.createContext<AuthContextType>({

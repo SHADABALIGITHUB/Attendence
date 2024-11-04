@@ -1,9 +1,11 @@
 import React from "react";
-import { CircularProgress, Box, Typography } from "@mui/material";
+import { CircularProgress, Box, Typography, Button } from "@mui/material";
+import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import { UserSheetType } from "../Dashboard";
 interface ProgressProps {
   value: number;
   item: UserSheetType;
+  Key:number;
 }
 const CircularProgressWithLabel = ({
   value,
@@ -17,7 +19,7 @@ const CircularProgressWithLabel = ({
       <CircularProgress
         variant="determinate"
         value={100}
-        size="100px"
+        size="120px"
         thickness={5}
         sx={{
           color: "gray",
@@ -26,11 +28,13 @@ const CircularProgressWithLabel = ({
       <Typography
         variant="body1"
         sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)', // Shift both horizontally and vertically
-            textAlign: 'center'
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)", // Shift both horizontally and vertically
+          textAlign: "center",
+          color: "green",
+          fontWeight: "900",
         }}
       >
         {inside}
@@ -38,7 +42,7 @@ const CircularProgressWithLabel = ({
 
       <CircularProgress
         variant="determinate"
-        size="100px"
+        size="120px"
         color="success"
         thickness={5}
         value={value}
@@ -52,22 +56,41 @@ const CircularProgressWithLabel = ({
   );
 };
 
-const ProgresCard: React.FC<ProgressProps> = ({ value, item }) => {
+const ProgresCard: React.FC<ProgressProps> = ({ value, item,Key }) => {
+  const DirectToSheetView=(value:number)=>{
+    alert(`Working on this part ,${value}`);
+  }
   return (
     <Box
+      key={Key}
       sx={{
-        width: "200px",
-        height: "200px",
-        backgroundColor: "",
+        width: "250px",
+        height: "250px",
+        margin: "8px",
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
+        cursor:'pointer',
+        gap:'10px',
+        borderRadius: 2,
+        overflow: "hidden",
+        boxShadow: 3,
+        transition: "transform 0.3s, box-shadow 0.3s",
+        "&:hover": {
+          transform: "scale(1.05)", // Slightly enlarge on hover
+          boxShadow: 8, // Increase shadow on hover
+        },
+        backgroundColor: "#f7feff", // Use theme background color
+        border: "1px solid", // Add a border
+        borderColor: "divider",
       }}
     >
-      <CircularProgressWithLabel value={value} inside="40%" />
-      <Typography variant="body1">{item.title} </Typography>
-      
+      <CircularProgressWithLabel value={value} inside={`${value}%`} />
+      <Typography variant="body1" sx={{fontFamily:'fantasy',fontWeight:'900',fontSize:'16px',}}>
+        {item.title.length>24? item.title.slice(0,24)+'...':item.title}
+      </Typography>
+      <Button  variant="outlined" endIcon={<TrendingFlatIcon />}  onClick={()=>{DirectToSheetView(item.sheetid)}}> Begin </Button>
     </Box>
   );
 };

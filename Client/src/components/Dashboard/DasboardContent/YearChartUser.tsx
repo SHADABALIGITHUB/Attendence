@@ -1,23 +1,43 @@
 
 import { ContributionCalendar } from 'react-contribution-calendar'
+import {ContributionType} from '../../../context/Auth';
+import React from 'react';
 
-const YearChartUser = () => {
+const YearChartUser:React.FC<{ contribution: ContributionType[]}> = ({contribution}) => {
+  
+   
 
-  const data:InputData[]=[
-    {
-      '2024-07-31':{level:2}
-    },
-    {
-      '2024-03-31':{level:4}
-    }
-  ]
+
+      const datafromuser:InputData[]= contribution.map((item)=>{
+        const key = Object.keys(item)[0]; // Get the first (and only) key
+        return {
+          [key]: { level: item[key] } // Create the desired object structure
+        };
+          
+        });
+
+       
+      
+
+   
+
+  // const data:InputData[]=[
+  //   {
+  //     '2024-07-31':{level:2}
+  //   },
+  //   {
+  //     '2024-03-31':{level:4}
+  //   }
+  // ]
+
+  
   const now=new Date();
   const year=now.getFullYear();
   
   
   return (
     <ContributionCalendar
-       data={data}
+       data={datafromuser}
        start={`${year}-01-01`}
        end={`${year}-12-31`}
        daysOfTheWeek={['Sun','Mon','Tue','Wed','Thu','Fri','Sat']}

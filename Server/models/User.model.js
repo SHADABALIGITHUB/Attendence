@@ -43,6 +43,18 @@ const UserSchema = new mongoose.Schema({
         },
         default: {}
     },
+     userType: {
+        type: String,
+        enum: ['admin', 'user'],
+        default: 'user', // Default to "user" for new users
+      },
+      contributions: {
+        type: [{ type: Object }],
+      },
+      dateOfAccountCreation: {
+        type: Date,
+        default: Date.now, // Default to the current date for account creation
+      },
    
 
 });

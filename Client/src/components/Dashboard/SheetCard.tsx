@@ -24,7 +24,7 @@ const SheetCard: React.FC<SheetCardProps> = ({ SheetType, data }) => {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {data.title}
+          {data.title.length>25?data.title.slice(0,25)+"...":data.title}
         </Typography>
         <Typography variant="body2" sx={{ color: "text.secondary" }}>
           Total Question : {data.Listquestion.length}
