@@ -9,13 +9,16 @@ import { Navigate } from "react-router-dom";
 import { AuthStatus } from "./context/Auth";
 import DashboardLayout from "./components/Dashboard/DashboardLayout";
 import TableForAdding from "./components/CreateSheet/TableForAdding";
-import ViewSheet from "./components/Dashboard/Sheets/ViewSheet";
+// import ViewSheet from "./components/Dashboard/Sheets/ViewSheet";
 import AdminCreateSheet from "./components/CreateSheet/AdminCreateSheet";
 import AuthUser from "./components/LoginRegister/AuthUser";
 import SheetCardViewInDashboard from "./components/Dashboard/Sheets/SheetCardViewInDashboard";
 import UserSheets from "./components/Dashboard/UsersSheets/UserSheets";
+import DefaultSheetView from "./components/Dashboard/Sheets/DefaultSheetView";
+import UserSheetView from "./components/Dashboard/Sheets/UserSheetView";
 import { DefaultSheetDataContext } from "./context/DefaultSheets";
 import Loading from "./components/Loading/Loading";
+
 
 function App() {
   const { authStatus, userData
@@ -84,7 +87,8 @@ function App() {
               }
             />
             <Route path="/create-sheet-table" element={<TableForAdding />} />
-            <Route path="/view-sheet" element={<ViewSheet />} />
+            <Route path="/view-default/:sheetid" element={<DefaultSheetView/>} />
+            <Route path="/view-user/:sheetid" element={<UserSheetView/>} />
             <Route
               path="/admin-create-sheet"
               element={

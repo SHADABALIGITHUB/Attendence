@@ -62,7 +62,7 @@ const DashboardContent:React.FC = () => {
   }
 
   return (
-     <Box sx={{backgroundColor:'',width:'100%',minHeight:'100vh',marginTop:'100px',marginBottom:'20px',display:'flex',position:'relative',flexDirection:'column'}}>
+     <Box sx={{backgroundColor:'',width:'100%',alignItems:'center',minHeight:'100vh',marginTop:{xs:'30px',sm:'100px'},marginBottom:'20px',display:'flex',position:'relative',flexDirection:'column'}}>
        
           <DefaultSheetCompletedStats/>
 

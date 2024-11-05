@@ -38,7 +38,7 @@ const UserSchema = new mongoose.Schema({
     defaultSheetProgress: {
         type: Map,
         of: {
-          progress: { type: Number, default: 0 }, // Progress in percentage (0-100)
+          progress: { type: [Number], default: 0 }, // Progress in percentage (0-100)
           lastUpdated: { type: Date, default: Date.now } // Track the last update date
         },
         default: {}

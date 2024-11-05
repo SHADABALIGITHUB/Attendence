@@ -28,7 +28,7 @@ const LoginUser = async (req, res) => {
         return res.status(200).json({ message: 'Password not matched', status: false });
         }
         const token = jwt.sign({ userId: user._id }, TOKEN_SECRET , {
-            expiresIn: '1h',
+            expiresIn: '7d',
         });   
         
     

@@ -24,7 +24,7 @@ interface UserData {
 
   defaultSheetProgress: {
     [sheetId: string]: {
-      progress: number;
+      progress: number[];
       lastUpdated: Date;
       _id: string;
     };

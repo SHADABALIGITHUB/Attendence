@@ -8,16 +8,25 @@ const DefaultSheetCompletedStats: React.FC = () => {
   const { DefaultSheetData } = useContext(DefaultSheetDataContext);
   const { userData } = useContext(AuthStatus);
   const ProgressData= userData?.defaultSheetProgress;
+  // console.log(ProgressData);
 
+  const getProgressPercentage = (progressArray:number[]) => {
+    const total = progressArray.length;
+    const completed = progressArray.reduce((acc, item) => acc + item, 0);
+    return total ? (Math.floor((completed / total) * 100)): 0; // Return 0 if the array is empty
+  };
 
   
  
   
   return (
     <Box
-      key={2}
       id="AllProgressContainer"
       sx={{
+         width:{
+           xs:'100vw',
+           sm:'100%'
+         },
         display: "flex",
         justifyContent:"center",
         alignItems: "center",
@@ -25,9 +34,14 @@ const DefaultSheetCompletedStats: React.FC = () => {
           xs:"10px",
           sm:"20px"
         },
+        padding:{
+          xs:'40px',
+          md:'0px',
+          
+        },
         flexWrap: "wrap",
         margin: {
-          xs:"3px",
+          xs:"10px",
           sm:"10px"
         },
         borderRadius:'10px',
@@ -37,18 +51,19 @@ const DefaultSheetCompletedStats: React.FC = () => {
         
       }}
     >
-      {DefaultSheetData.map(
-        (item) =>
-          userData?.defaultSheetProgress &&
-           
-            <>
+     {ProgressData && DefaultSheetData.map((item) =>{
+         const progress = ProgressData[item.sheetid]?.progress;
+         if (!progress) return null;
+            
+         const percentage = getProgressPercentage(progress);
+            
               {
-              ProgressData&&<ProgresCard value={ProgressData[item.sheetid].progress} item={item} Key={parseInt(item._id)} />
+               return (<ProgresCard key={parseInt(item._id)} value={percentage} item={item}/> );
               
               }
-            </>
+           
         
-      )}
+       })}
 
     
     </Box>

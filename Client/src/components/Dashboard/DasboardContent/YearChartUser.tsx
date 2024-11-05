@@ -9,11 +9,10 @@ const YearChartUser:React.FC<{ contribution: ContributionType[]}> = ({contributi
 
 
       const datafromuser:InputData[]= contribution.map((item)=>{
-        const key = Object.keys(item)[0]; // Get the first (and only) key
+        const key = Object.keys(item)[0]; 
         return {
-          [key]: { level: item[key] } // Create the desired object structure
+          [key]: { level: item[key] }
         };
-          
         });
 
        
@@ -30,7 +29,7 @@ const YearChartUser:React.FC<{ contribution: ContributionType[]}> = ({contributi
   //   }
   // ]
 
-  
+
   const now=new Date();
   const year=now.getFullYear();
   

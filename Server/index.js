@@ -18,28 +18,60 @@ const mongooseConnect = require('./config/database');
 mongooseConnect();
 
 // const User =require('./models/User.model');
+// const {Sheets}= require('./models/UserSheets/DefaultSheets');
 
 
 // async function addDefaultSheetProgress() {
 //     try {
+//         // Step 1: Fetch all the default sheets from the DefaultSheet schema
+//         const defaultSheets = await Sheets.find({});
+    
+//         //  console.log(defaultSheets.length)
+//         // Step 2: For each default sheet, update the progress for each user
+//         // for (const sheet of defaultSheets) {
+//           // Get the sheet ID and the number of questions
+//         //   const { sheetid, Listquestion} = sheet;
+//         //   const numQuestions = Listquestion.length;
+//         //   console.log(numQuestions);
+    
+//           // Step 3: Update users' progress for this sheet
+//           // Fetch all users who have this sheet in their defaultSheetProgress
+//         //   const users = await User.find({'defaultSheetProgress': { $in: [sheetid] } });
+//           const users = await User.find();
+//         //   console.log(users);
 
-//         const users = await User.find({});
+    
+//           for (const user of users) {
+           
+//             //   const updatedProgress = Array(numQuestions).fill(0); // Create an array of zeros of length numQuestions
+//             //   console.log(user.defaultSheetProgress) 
 
-//         for (const user of users) {
-//             // Create a new contributions array
-//             const newContributions = [];
+//               for(const sh of defaultSheets){
+//                 const { sheetid, Listquestion} = sh;
+//                 console.log(user.defaultSheetProgress.get(String(sheetid)).progress);
+                     
+//                 if (user.defaultSheetProgress) {
+//                     const updatedProgress = Array(Listquestion.length).fill(0);
+//                     // Update the progress for this sheet
+//                     user.defaultSheetProgress.get(String(sheetid)).progress = updatedProgress;
+//                   }
+
+//               }
+              
       
-//             // Initialize contributions with the current date as the key and 1 as the value
-//             newContributions.push({
-//               [new Date().toISOString().split('T')[0]]: 1, // Format date as YYYY-MM-DD
-//             });
-      
-//             // Update the user with the new contributions format
-//             user.contributions = newContributions;
-//             await user.save();
-//           }
-       
-//     } catch (error) {
+//             // //   // Update the user's defaultSheetProgress
+//             // //   user.defaultSheetProgress.set(sheetid, {
+//             // //     progress: updatedProgress});
+    
+//               await user.save();
+//               console.log(`Updated progress for user ${user.email} on sheet`);
+//             }
+//         //   }
+//         // }
+    
+//         console.log('All user progress updated.');
+//       } 
+//     catch (error) {
 //       console.error('Error updating users:', error);
 //     } 
 //   }
@@ -63,6 +95,8 @@ const AddQuestionsIntoSheetsRouter=require('./routes/Sheets/AddQuestionToSheet.r
 const GetAllQuestionsRoute=require('./routes/Sheets/GetAllQuestions.routes')
 const ImageUploadedToCloudRouter=require('./routes/ImageUploadedToCloud.routes');
 const TokenToUserData=require('./routes/Auth/TokenToUserData.routes');
+const GetQuestionListBasedOnSheetRouter =require('./routes/Sheets/GetQuestionListBasedOnSheet.routes');
+const GetQuestionListBasedOnUserSheetRouter=require('./routes/Sheets/GetQuestionListBasedOnUserSheet.routes');
 
 // Define a sample route
 app.get('/', (req, res) => {
@@ -88,6 +122,8 @@ app.use('/api/sheet',ImageUploadedToCloudRouter);
 
 app.use('/api/question',GetQuestionRouter);
 app.use('/api/question',GetAllQuestionsRoute);
+app.use('/api/question',GetQuestionListBasedOnSheetRouter);
+app.use('/api/question',GetQuestionListBasedOnUserSheetRouter);
 
 
 // admin route only

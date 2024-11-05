@@ -2,10 +2,11 @@ import React from "react";
 import { CircularProgress, Box, Typography, Button } from "@mui/material";
 import TrendingFlatIcon from '@mui/icons-material/TrendingFlat';
 import { UserSheetType } from "../Dashboard";
+import { useNavigate } from "react-router-dom";
 interface ProgressProps {
   value: number;
   item: UserSheetType;
-  Key:number;
+ 
 }
 const CircularProgressWithLabel = ({
   value,
@@ -56,13 +57,16 @@ const CircularProgressWithLabel = ({
   );
 };
 
-const ProgresCard: React.FC<ProgressProps> = ({ value, item,Key }) => {
-  const DirectToSheetView=(value:number)=>{
-    alert(`Working on this part ,${value}`);
+const ProgresCard: React.FC<ProgressProps> = ({ value, item}) => {
+  const navigate=useNavigate();
+    // console.log(value);
+  const DirectToSheetView=(sheetid:number)=>{
+      
+      navigate(`/view-default/${sheetid}`)
   }
   return (
     <Box
-      key={Key}
+     
       sx={{
         width: "250px",
         height: "250px",

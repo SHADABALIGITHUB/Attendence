@@ -37,9 +37,12 @@ const SheetCard: React.FC<SheetCardProps> = ({ SheetType, data }) => {
         <Button
           size="small"
           onClick={() => {
-            navigate("/view-sheet", {
-              state: { Listquestion: data.Listquestion },
-            });
+            { SheetType==="UserSheet"?
+            navigate(`/view-user/${data.sheetid}`):
+            navigate(`/view-default/${data.sheetid}`);
+             
+            }
+
           }}
         >
           {" "}
