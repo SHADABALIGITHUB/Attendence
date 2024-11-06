@@ -16,11 +16,18 @@ import {
   Link,
 } from "@mui/material";
 import FetchInstance from "../../../fetchInstance/Fetch";
+import SmallLoading from "../../Loading/SmallLoading";
+import { SnackbarContext } from "../../../context/SnackbarProvider";
+
+
 
 const DefaultSheetView: React.FC = () => {
   const { sheetid } = useParams();
   const [progress, setProgress] = useState(0);
-  const { userData } = useContext(AuthStatus);
+  const [loading,setLoading]=useState<boolean>(false);
+  const [progressArray,setProgressArray]=useState<number[]>([]);
+  const { userData ,setUserData } = useContext(AuthStatus);
+  const {openSnackbar}=useContext(SnackbarContext);
   const [ListQuestion, SetListQuestion] = useState<
     QuestionDetail[] | undefined
   >(undefined);
@@ -42,6 +49,7 @@ const DefaultSheetView: React.FC = () => {
         //  console.log(FetchQuestionList);
         SetListQuestion(FetchQuestionList.questions);
         const progress = FetchQuestionList.progress;
+        setProgressArray(progress);
         if (progress.length === 0) {
           setProgress(0);
         } else {
@@ -63,18 +71,68 @@ const DefaultSheetView: React.FC = () => {
       console.log("error in view Page", err);
     }
   };
-  const OnSolved = () => {
-    alert("Working on this Part ");
+  const OnSolved = async(sheetid:number, email:string,index:number) => {
+    setLoading(true);
+    try{
+
+          const user=await FetchInstance('/api/user-update-defaultsheet/updating-user-progress',{
+              method:'POST',
+              body:JSON.stringify({sheetid:sheetid,email:email,index:index})
+          })
+          if(user){
+             openSnackbar("Question Completed")
+
+           
+             setUserData(user.data[0]);
+             const progress = user.data[0].defaultSheetProgress[sheetid].progress;
+             setProgressArray(progress);
+             if (progress.length === 0) {
+              setProgress(0);
+            } else {
+              let count = 0;
+              const total = progress.length;
+              for (const pro of progress) {
+                if (pro === "1" || pro===1) {
+                  count++;
+                  
+                }
+              }
+    
+              // console.log((count / total) * 100);
+    
+              setProgress((count / total) * 100);
+            }
+
+       
+            
+             
+
+          }
+
+    }
+    catch(err){
+        
+        console.log("Issue in Updating",err);
+        setLoading(false);
+        openSnackbar("Server Err Try Later");
+    }
+      
+    setLoading(false);
   };
 
   useEffect(() => {
     GetQuestionData();
   }, []);
 
-  if (!ListQuestion) {
+ useEffect(() => {
+   
+  }, [userData]);  
+
+
+  if (!ListQuestion || loading || !userData || !sheetid) {
     return (
       <>
-        <h1> Loading .. </h1>
+        <SmallLoading value="Wait render may Take time" />
       </>
     );
   }
@@ -146,9 +204,9 @@ const DefaultSheetView: React.FC = () => {
                 </TableCell>
                 <TableCell align="center">
                   <Checkbox
-                    checked={item.hasSolution}
-                    onChange={OnSolved}
-                    name={item.hasSolution ? "Solved" : "Unsolved"}
+                    checked={progressArray[index]===1}
+                    onChange={()=>{OnSolved(parseInt(sheetid),userData.email,index)}}
+                    name={"solution"}
                   />
                 </TableCell>
               </TableRow>

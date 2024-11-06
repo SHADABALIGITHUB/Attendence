@@ -228,10 +228,10 @@ const RoutesInNavbar:React.FC<RoutesPropsTypes> = ({openCloseDropDown,mobile}) =
       >
         <MenuItem disabled>
           <Typography variant="body1">
-             {userData?.username}
+             {/* {userData?.username} */}
           </Typography>
           <Typography variant="body1">
-             {userData?.email}
+             {userData?.email.slice(0,5)+'**@'+userData?.email.split('@')[1]}
           </Typography>
         </MenuItem>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>

@@ -16,6 +16,7 @@ import {
     Link
   } from "@mui/material";
 import { useParams } from 'react-router-dom';
+import SmallLoading from '../../Loading/SmallLoading';
 
 
 
@@ -76,7 +77,7 @@ const UserSheetView:React.FC= () => {
   if (!ListQuestion ) {
     return (
       <>
-        <h1> Loading .. </h1>
+       <SmallLoading value="Please referesh page Something"/>
       </>
     );
   }
