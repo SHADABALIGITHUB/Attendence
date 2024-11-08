@@ -2,6 +2,7 @@ const User = require('../../models/User.model');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const otpGenerator =require('../../utils/otpGenerator');
+const progressArray=require('../../services/UserCreation/ProgressArrayInUser');
 require('dotenv');
 
 const transporter = nodemailer.createTransport({
@@ -33,6 +34,11 @@ const createUser = async (req, res) => {
     const hashingPassword = await bcrypt.hash(password, 10);
     const otp=otpGenerator()
 
+    const userprogress=await progressArray();
+    // console.log(userprogress);
+    
+
+
     // Create the user in the database
     const user = await User.create({
       username,
@@ -40,12 +46,15 @@ const createUser = async (req, res) => {
       email,
       verifiedStaus:false,
       otp:otp,
-      otpExpires: Date.now()+300000
+      otpExpires: Date.now()+300000,
+      defaultSheetProgress:userprogress
 
 
 
 
     });
+
+    // console.log(user);
 
     // If user is successfully created, return a success message
     if (user) {

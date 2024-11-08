@@ -32,13 +32,10 @@ const updateprogress= async (email,sheetid,index)=>{
         
         await user.save();
 
-        // console.log(`Progress updated: ${sheetProgress.progress[index]}`);
-        // // const filteredsheet=await Sheets.find({"sheetid":sheetid});
+       
         const finduser=await User.find({"email":email});
         return {finduser};
-        // console.log(finduser[0].defaultSheetProgress.get(String(sheetid)).progress[index]);
-        
-        // console.log(filteredsheet);
+       
 
     }
     catch(err){

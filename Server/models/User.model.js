@@ -34,6 +34,7 @@ const UserSchema = new mongoose.Schema({
     },
     longestStreak:{
         type: Number,
+        default:0,
     },
     defaultSheetProgress: {
         type: Map,

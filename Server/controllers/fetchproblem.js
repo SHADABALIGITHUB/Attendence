@@ -46,7 +46,7 @@ const  fetchLeetCodeProblems=async(req,res)=> {
         variables: {
             categorySlug: "",
             skip: 0,
-            limit: 3308,
+            limit: 3343,
             filters: {}
         }
     };
@@ -57,7 +57,7 @@ const  fetchLeetCodeProblems=async(req,res)=> {
          
          
       
-    for(let i=0;i<3308;i++){
+    for(let i=0;i<3343;i++){
         const value=response.data.data.problemsetQuestionList.questions[i];
 
         const done= await  Question.create({
@@ -83,7 +83,7 @@ const  fetchLeetCodeProblems=async(req,res)=> {
          
       }
 
-        res.send(`User Created`);
+        res.send(`Questions Added `);
 
 
 
