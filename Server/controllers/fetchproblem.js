@@ -73,7 +73,7 @@ const  fetchLeetCodeProblems=async(req,res)=> {
 "titleSlug": value.titleSlug,
 "link": `https://leetcode.com/problems/${value.titleSlug}/description/`,
 "topicTags": value.topicTags,
-"hasSolution": value.hasSolution,
+"hasSolution": false,
 "hasVideoSolution": value.hasVideoSolution,
 
         });

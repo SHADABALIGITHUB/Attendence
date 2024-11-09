@@ -10,7 +10,8 @@ import FetchInstance from "../../fetchInstance/Fetch";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthStatus } from "../../context/Auth";
-import CircularProgress from "@mui/material/CircularProgress";
+// import CircularProgress from "@mui/material/CircularProgress";
+import SmallLoading from "../Loading/SmallLoading";
 import { Logintype } from "../../context/Logintype";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
@@ -145,6 +146,11 @@ const AuthUser: React.FC = () => {
       setLoading(false);
     }
   };
+  if(loading){
+    return ( <SmallLoading value="Server May Take Up to 1 minute To Start"/>
+    
+    )
+  }
   return (
     <Box
       onSubmit={logintype === "Register" ? handleRegister : handleSubmit}
@@ -166,10 +172,7 @@ const AuthUser: React.FC = () => {
         <CloseIcon />
       </IconButton>
 
-      {loading ? (
-        <CircularProgress size={24} />
-      ) : (
-        <>
+     
           <Typography
             variant="h4"
             sx={{
@@ -270,9 +273,7 @@ const AuthUser: React.FC = () => {
               ? "Already have an account? Log in"
               : "Don't have an account? Register "}
           </MuiLink>
-          '
-        </>
-      )}
+        
     </Box>
   );
 };

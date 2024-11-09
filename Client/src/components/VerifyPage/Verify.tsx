@@ -6,7 +6,8 @@ import { Button } from '@mui/material';
 import { useLocation,useNavigate } from 'react-router-dom';
 import FetchInstance from '../../fetchInstance/Fetch';
 import {Logintype} from '../../context/Logintype';
-import CircularProgress from "@mui/material/CircularProgress";
+// import CircularProgress from "@mui/material/CircularProgress";
+import SmallLoading from '../Loading/SmallLoading';
 import { SnackbarContext } from '../../context/SnackbarProvider';
 export default function OTPInput() {
   const [otp, setOtp] = React.useState<String[]>(new Array(4).fill(''));
@@ -33,6 +34,7 @@ export default function OTPInput() {
            
     
             if(response.message==="OTP verified successfully"){
+              openSnackbar("Email Verified Login Herer");
               setLogintype('Login');
               setloading(false);
               navigate('/auth');
@@ -142,10 +144,17 @@ export default function OTPInput() {
           
   }
 
+  if(loading){
+    return (
+      <SmallLoading value='Please Login After This' />
+
+    )
+  }
+
   return (
     <Box sx={{ display: 'flex',flexDirection:'column', gap: 2 ,color:'black'}}>
         <div style={{display:'flex',gap:'15px'}}>
-        {loading? <CircularProgress size={24}/> : <>{otp.map((value, index) => (
+        {otp.map((value, index) => (
         <InputElement
           key={index}
           id={`otp-input-${index}`}
@@ -154,8 +163,8 @@ export default function OTPInput() {
           onKeyDown={(e) => handleKeyDown(e, index)}
           onChange={(event) => handleOnChange(event, index)}
         />
-      ))}</>
-       }
+      ))}
+       
       </div>
      <Button onClick={onVerify}>Verify</Button>
     </Box>

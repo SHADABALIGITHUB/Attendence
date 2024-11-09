@@ -83,7 +83,7 @@ const UserSheetView:React.FC= () => {
   }
 
   return (
-    <TableContainer component={Paper} sx={{ marginTop: "100px" }}>
+    <TableContainer component={Paper} sx={{ marginTop: "100px",overflowX:{xs:"scroll",md:'inherit'},width:{xs:"400px",md:'100%'} }}>
 
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         
