@@ -58,7 +58,7 @@ const DefaultSheetCompletedStats: React.FC = () => {
          const percentage = getProgressPercentage(progress);
             
               {
-               return (<ProgresCard key={parseInt(item._id)} value={percentage} item={item}/> );
+               return (<ProgresCard key={item._id} value={percentage} item={item}/> );
               
               }
            

@@ -6,8 +6,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import SheetCard from '../SheetCard';
-import {UserSheetType} from '../Dashboard';
+import SheetCard from './SheetCard';
+import {UserSheetType} from '../Dashboard/Dashboard';
 
 
 interface  SheetFormateType{

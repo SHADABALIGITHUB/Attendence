@@ -2,7 +2,6 @@ import { Route, Routes } from "react-router-dom";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Layout from "./Layout/Layout";
 import Verify from "./components/VerifyPage/Verify";
-import Dashboard from "./components/Dashboard/Dashboard";
 import CreateSheet from "./components/CreateSheet/CreateSheet";
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
@@ -12,12 +11,13 @@ import TableForAdding from "./components/CreateSheet/TableForAdding";
 // import ViewSheet from "./components/Dashboard/Sheets/ViewSheet";
 import AdminCreateSheet from "./components/CreateSheet/AdminCreateSheet";
 import AuthUser from "./components/LoginRegister/AuthUser";
-import SheetCardViewInDashboard from "./components/Dashboard/Sheets/SheetCardViewInDashboard";
-import UserSheets from "./components/Dashboard/UsersSheets/UserSheets";
-import DefaultSheetView from "./components/Dashboard/Sheets/DefaultSheetView";
-import UserSheetView from "./components/Dashboard/Sheets/UserSheetView";
+import SheetCardViewInDashboard from "./components/Sheets/SheetCardContainer";
+import UserSheets from "./components/UsersSheets/UserSheets";
+import DefaultSheetView from "./components/Sheets/DefaultSheetView";
+import UserSheetView from "./components/Sheets/UserSheetView";
 import { DefaultSheetDataContext } from "./context/DefaultSheets";
 import Loading from "./components/Loading/Loading";
+import DashboardContent from "./components/Dashboard/DasboardContent/DashboardContent";
 
 
 function App() {
@@ -65,7 +65,7 @@ function App() {
               path="/dashboard"
               element={
                 <Loading>
-                  <Dashboard />
+                  <DashboardContent />
                 </Loading>
               }
             />

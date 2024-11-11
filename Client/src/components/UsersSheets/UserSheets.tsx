@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserSheetType } from "../Dashboard";
-import SheetCardViewInDashboard from "../Sheets/SheetCardViewInDashboard";
-import { AuthStatus } from "../../../context/Auth";
-import FetchInstance from "../../../fetchInstance/Fetch";
-import SmallLoading from "../../Loading/SmallLoading";
+import { UserSheetType } from "../Dashboard/Dashboard";
+import SheetCardViewInDashboard from "../Sheets/SheetCardContainer";
+import { AuthStatus } from "../../context/Auth";
+import FetchInstance from "../../fetchInstance/Fetch";
+import SmallLoading from "../Loading/SmallLoading";
 
 const UserSheets: React.FC = () => {
   const { userData } = useContext(AuthStatus);

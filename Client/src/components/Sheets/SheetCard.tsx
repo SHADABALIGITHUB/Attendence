@@ -5,7 +5,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { UserSheetType } from "./Dashboard";
+import { UserSheetType } from "../Dashboard/Dashboard";
 import { useNavigate } from "react-router-dom";
 import { AuthStatus } from "../../context/Auth";
 interface SheetCardProps {

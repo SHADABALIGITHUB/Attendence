@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { AuthStatus } from '../../../context/Auth';
+import { AuthStatus } from '../../context/Auth';
  const UserData:React.FC = () => {
     const {userData}= useContext(AuthStatus);
 

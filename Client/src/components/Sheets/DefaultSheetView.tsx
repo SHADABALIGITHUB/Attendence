@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { AuthStatus } from "../../../context/Auth";
-import { QuestionDetail } from "../Dashboard";
+import { AuthStatus } from "../../context/Auth";
+import { QuestionDetail } from "../Dashboard/Dashboard";
 import {
   TableContainer,
   Table,
@@ -15,9 +15,9 @@ import {
   LinearProgress,
   Link,
 } from "@mui/material";
-import FetchInstance from "../../../fetchInstance/Fetch";
-import SmallLoading from "../../Loading/SmallLoading";
-import { SnackbarContext } from "../../../context/SnackbarProvider";
+import FetchInstance from "../../fetchInstance/Fetch";
+import SmallLoading from "../Loading/SmallLoading";
+import { SnackbarContext } from "../../context/SnackbarProvider";
 
 
 

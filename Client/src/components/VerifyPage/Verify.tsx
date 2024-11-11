@@ -39,6 +39,12 @@ export default function OTPInput() {
               setloading(false);
               navigate('/auth');
           }
+          else{
+            openSnackbar("Otp Not Matched");
+            
+
+             
+          }
            
             
     

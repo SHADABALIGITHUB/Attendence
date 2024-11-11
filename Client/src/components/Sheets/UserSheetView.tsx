@@ -1,7 +1,7 @@
 import React,{useState, useEffect,useContext } from 'react'
-import FetchInstance from '../../../fetchInstance/Fetch';
-import { SnackbarContext } from "../../../context/SnackbarProvider";
-import { QuestionDetail } from "../Dashboard";
+import FetchInstance from '../../fetchInstance/Fetch';
+import { SnackbarContext } from "../../context/SnackbarProvider";
+import { QuestionDetail } from "../Dashboard/Dashboard";
 import {
     TableContainer,
     Table,
@@ -16,7 +16,7 @@ import {
     Link
   } from "@mui/material";
 import { useParams } from 'react-router-dom';
-import SmallLoading from '../../Loading/SmallLoading';
+import SmallLoading from '../Loading/SmallLoading';
 
 
 
