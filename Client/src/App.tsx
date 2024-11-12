@@ -18,7 +18,8 @@ import UserSheetView from "./components/Sheets/UserSheetView";
 import { DefaultSheetDataContext } from "./context/DefaultSheets";
 import Loading from "./components/Loading/Loading";
 import DashboardContent from "./components/Dashboard/DasboardContent/DashboardContent";
-
+import ForgetPassword from "./components/ForgetPassword/ForgetPassword";
+import UserSheetsDataProvider from "./context/UserSheets";
 
 function App() {
   const { authStatus, userData
@@ -48,6 +49,14 @@ function App() {
               authStatus ? <Navigate to="/dashboard" replace /> : <AuthUser />
             }
           />
+          <Route 
+          path="/forget-password"
+          element={
+
+            authStatus ? <Navigate to="/dashboard" replace /> : <ForgetPassword/>
+
+          }
+          />
           <Route
             path="/register-verify"
             element={
@@ -58,7 +67,7 @@ function App() {
           <Route
             path="/"
             element={
-              authStatus ? <DashboardLayout /> : <Navigate to="/auth" replace />
+              authStatus ? <UserSheetsDataProvider><DashboardLayout /></UserSheetsDataProvider> : <Navigate to="/auth" replace />
             }
           >
             <Route

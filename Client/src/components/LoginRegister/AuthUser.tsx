@@ -273,6 +273,13 @@ const AuthUser: React.FC = () => {
               ? "Already have an account? Log in"
               : "Don't have an account? Register "}
           </MuiLink>
+          <MuiLink
+            sx={{ fontSize: { xs: "12px", md: "14px" }, cursor: "pointer" }}
+            underline="hover"
+            href="/forget-password"
+          >
+            Forget-Password ?
+          </MuiLink>
         
     </Box>
   );

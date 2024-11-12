@@ -17,6 +17,8 @@ import {
   } from "@mui/material";
 import { useParams } from 'react-router-dom';
 import SmallLoading from '../Loading/SmallLoading';
+// import { UserSheetsDataContext } from '../../context/UserSheets';
+
 
 
 
@@ -27,7 +29,7 @@ const UserSheetView:React.FC= () => {
     const {sheetid}=useParams();
     const [ListQuestion, SetListQuestion] = useState<QuestionDetail[] | undefined>(undefined);
 
-     
+    // const {refreshSheets}=useContext(UserSheetsDataContext);
     const { openSnackbar } = useContext(SnackbarContext);
   //    question calling based on sheet id 
   const callingSheetData = async () => {
@@ -62,9 +64,30 @@ const UserSheetView:React.FC= () => {
     }
   };
 
-   const OnSolved=()=>{
+   const OnSolved= async (sheetid:string|undefined,index:number)=>{
+     
+     if(!sheetid){
+        openSnackbar("Somthing went wrong");
+        return;
+     }
+
+       try{
+         const update= await FetchInstance('/api/user-update-usersheet/updating-usersheet',{
+          method:"POST",
+          body:JSON.stringify({sheetid:parseInt(sheetid),index:index})
+          })
+          // refreshSheets();
+          callingSheetData();
+          console.log(update);
+
+       }
+       catch(err){
+
+           console.log("error in progress",err);
+
+       }
                 
-     alert("Working on this Part ");
+   
    }
 
   useEffect(() => {
@@ -152,7 +175,7 @@ const UserSheetView:React.FC= () => {
                   
                   <Checkbox
                     checked={item.hasSolution}
-                    onChange={OnSolved}
+                    onChange={()=>{OnSolved(sheetid,item.frontendQuestionId)}}
                     name={item.hasSolution ? "Solved" : "Unsolved"}
                   />
                 </TableCell>

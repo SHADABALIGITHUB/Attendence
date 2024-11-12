@@ -1,94 +1,66 @@
-// import React, { createContext, useState, useEffect, useContext } from 'react';
-// import FetchInstance from '../fetchInstance/Fetch';
+import React, { createContext, useState, useEffect, useContext } from "react";
+import FetchInstance from "../fetchInstance/Fetch";
 
+import { UserSheetType } from "../components/Dashboard/Dashboard";
+import { AuthStatus } from "./Auth";
 
-// import  {UserSheetType} from '../components/Dashboard/Dashboard'
-// import { AuthStatus } from './Auth';
+interface QuestionSheetContextType {
+  UserSheetsData: UserSheetType[];
+  // setUserSheetsData:React.Dispatch<React.SetStateAction<UserSheetType[]>>
+  refreshSheets: () => void;
+}
 
+export const UserSheetsDataContext = createContext<QuestionSheetContextType>({
+  UserSheetsData: [],
+  // setUserSheetsData:()=>{},
+  refreshSheets: () => {},
+});
 
-// interface QuestionSheetContextType{
-//     UserSheetsData:UserSheetType[],
-//     setUserSheetsData:React.Dispatch<React.SetStateAction<UserSheetType[]>>
-//     refreshSheets: () => void 
-// }
+// Create a provider component
+const UserSheetsDataProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [UserSheetsData, setUserSheetsData] = useState<UserSheetType[]>([]);
+  const { userData } = useContext(AuthStatus);
 
-// export const UserSheetsDataContext= createContext<QuestionSheetContextType>({
-//     UserSheetsData:[],
-//     setUserSheetsData:()=>{},
-//     refreshSheets: () => {}
-// });
+  const CallApi = async () => {
+    if (!userData?.email) {
+      return;
+    }
 
-// // Create a provider component
-// const UserSheetsDataProvider:React.FC<{children:React.ReactNode}> = ({ children }) => {
-//     const [UserSheetsData, setUserSheetsData] = useState<UserSheetType[]>([]);
-   
-//      const {authStatus}=useContext(AuthStatus);
- 
-          
-//        const email=localStorage.getItem('email');
-       
-     
-     
-  
+    try {
+      const response = await FetchInstance(
+        `/api/sheet/user/${userData?.email}`,
+        {
+          method: "GET",
+        }
+      );
 
- 
-    
-        
+      if (response.status) {
+        setUserSheetsData(response.data);
 
-//         const CallApi =async()=>{
+        // console.log(response);
+      } else {
+        console.log("somthing Wrong ");
+      }
+    } catch (err) {
+      console.log("Err 501 server issue", err);
+    }
+  };
 
-//             if(!email){
-//                 return ;
-//              }
+  const refreshSheets = () => {
+    CallApi();
+  };
 
-//           try{
-//             const response=await FetchInstance(`/api/sheet/user/${email}`,{
-//               method:"GET"
-//             })
+  useEffect(() => {
+    CallApi();
+  }, []);
 
-//             if(response.status){
+  return (
+    <UserSheetsDataContext.Provider value={{ UserSheetsData, refreshSheets }}>
+      {children}
+    </UserSheetsDataContext.Provider>
+  );
+};
 
-//                 setUserSheetsData(response.data);
-               
-                
-
-//             }
-//             else{
-
-//                console.log("somthing Wrong ");
-
-//             }
-
-//           }
-//           catch(err){
-
-//               console.log("Err 501 server issue",err);
-
-//           }
-
-//         }
-
-//         const refreshSheets = () => {
-//             CallApi();
-//           };
-
-//       useEffect(()=>{
-        
-
-//         CallApi();
-
-        
-        
-       
-
-//      },[authStatus]);
-
-//     return (
-//         <UserSheetsDataContext.Provider value={{ UserSheetsData,setUserSheetsData,refreshSheets }}>
-//             {children}
-//         </UserSheetsDataContext.Provider>
-//     );
-// };
-
-
-// export default UserSheetsDataProvider;
+export default UserSheetsDataProvider;
