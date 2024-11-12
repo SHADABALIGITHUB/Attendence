@@ -5,6 +5,7 @@ import {Link as RouterLink, useNavigate} from 'react-router-dom';
 import { style } from "../../styles/login";
 import { SnackbarContext } from '../../context/SnackbarProvider';
 import FetchInstance from '../../fetchInstance/Fetch';
+import  SmallLoading from '../Loading/SmallLoading';
 const ForgetPassword:React.FC= () => {
   const [email,setEmail]=useState<string>('');
   const [mailsend,setMailSend]=useState<boolean>(false);
@@ -12,12 +13,13 @@ const ForgetPassword:React.FC= () => {
   const [password,setPassword]=useState<String>("");
   const [confirmPassword,setConfirmPassword]=useState<String>("");
   const {openSnackbar}=useContext(SnackbarContext);
+  const [loading,setloading]=useState<boolean>(false);
   const navigate=useNavigate()
 
 
    const handleSubmitEmail= async (event:React.FormEvent<HTMLFormElement>)=>{
        event.preventDefault();
-      
+       setloading(true);
 
        try{
             const response= await FetchInstance('/api/forget-password/email-send-otp',{
@@ -37,10 +39,12 @@ const ForgetPassword:React.FC= () => {
             else{
               openSnackbar("Server error");
             }
+            setloading(false);
 
        }catch(err){
            console.log("Email issue ",err)
            openSnackbar("Server error");
+           setloading(false);
        }
         
        
@@ -79,6 +83,7 @@ const ForgetPassword:React.FC= () => {
   const handlepasswordChangeSubmit= async (event:React.FormEvent<HTMLFormElement>)=>{
     event.preventDefault();
     const ActuallOtp=otp.split('-').join('');
+    setloading(true);
        try
        {
            const response= await FetchInstance('/api/forget-password/change-password',{
@@ -87,7 +92,8 @@ const ForgetPassword:React.FC= () => {
            })
            if(response.message==="Password Changed Successfully"){
 
-            openSnackbar("Password Changed Login")
+            openSnackbar("Password Changed Login");
+            setloading(false);
             navigate('/auth');
               
            }else if(response.message==="Otp not verified"){
@@ -96,14 +102,21 @@ const ForgetPassword:React.FC= () => {
            else{
             openSnackbar("Something Went Wrong here");
            }
-           
+           setloading(false);
        }
        catch(err)
        {
          console.log("Issue in Changing password",err);
         openSnackbar("Something Went Wrong here");
+        setloading(false);
 
        }
+  }
+
+  if(loading){
+    return (
+       <SmallLoading value="Wait a moment"/>
+    )
   }
 
   return (
