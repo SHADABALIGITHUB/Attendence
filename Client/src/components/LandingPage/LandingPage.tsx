@@ -117,6 +117,9 @@ const LandingPage:React.FC = () => {
                        
                
                 </Box>
+
+                 <Typography variant='body2' sx={{margin:'10px'}}> Test : Email : <span style={{color:'blue'}}>test@gmail.com </span> <br/>
+                  Password: <span style={{color:'blue'}}> test </span></Typography>
             </Box>
 
             <Box
